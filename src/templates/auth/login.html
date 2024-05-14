@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-login-reg.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container" id="form-container">
+    
+    <!-- Header del login 
+    ------------------------------------------- -->
+    <div class="row" id="header-form">
+        <input type="text" name="" id="" style="display: none;">
+        <div class="seven columns header-active">
+            <h6 class="btn-login">Iniciar sesión</h6>
+        </div>
+        
+        <div class="five columns">
+            <h6 class="btn-register">Registrate</h6>
+        </div>
+    </div>
+    
+    <!-- Body del formulario
+    --------------------------------------------  -->
+    <div class="row active" id="body-form">
+
+        <div class="row" id="logo">
+            <img src="{{ url_for('static', filename='images/logo/logo-example.png') }}" alt="Logo empresa">
+        </div>
+                
+        <!-- Body del login
+        --------------------------------------------  -->
+        <form action="/login" method="POST" id="body-login" class="active">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                
+                    {% for message in messages %}
+                    <div class="row messages-bd show" id="messagesLog">
+                        <div class="row message">
+                            <div class="two columns">
+                                <i class='bx bx-error-circle' ></i><i class='bx bxs-error-circle'></i>
+                            </div>
+                            <div class="ten columns">
+                                <p>{{ message }}</p>
+                                <i class='bx bx-x close-msg' onclick="closeMessage('Log')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                
+                {% endif %}
+                
+            {% endwith %}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            
+            <div class="row">
+                
+                <div class="twelve columns">
+                    <h5>¡Inicia sesión ya!</h5>
+                </div>
+                
+                <div class="twelve columns">
+                    <div class="row control-form">
+                        <label for="usernameImput"><i class='bx bxs-user'></i></label>
+                        <input class="u-full-width" type="text" name="username" placeholder="Usuario" id="usernameImput" maxlength="15" minlength="3" required autofocus>
+                    </div>
+
+                    <div class="row control-form">
+                        <label for="passwordImput1"><i class='bx bxs-key' ></i></label>
+                        <input class="u-full-width" type="password" name="password" placeholder="Contraseña" maxlength="16" minlength="4" id="passwordImput1" required>
+                    </div>
+                </div>
+                
+            </div>
+
+            <button type="submit" class="btn-submit">Ingresar</button>
+        </form>
+        
+
+
+        <!-- Body del register
+        --------------------------------------------  -->
+        <form action="/register" method="POST" id="body-register" enctype="multipart/form-data">
+            
+            <div class="row messages-bd" id="messagesReg">
+                <div class="row message">
+                    <div class="two columns">
+                        <i class='bx bx-error-circle' ></i><i class='bx bxs-error-circle'></i>
+                    </div>
+                    <div class="ten columns">
+                        <p>{{ message }}</p>
+                        <i class='bx bx-x close-msg' onclick="closeMessage('Reg')"></i>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="csrf_token2" value="{{ csrf_token() }}">
+            
+            <div class="row">
+
+                <div class="twelve columns">
+                    <h5>¡Regístrate ahora!</h5>
+                </div>
+    
+                <div class="twelve columns">
+                    
+                    
+
+                    <div class="row">
+                        <div class="five columns control-form">
+                            <label for="usernameImput1"><i class='bx bxs-user'></i><i class='bx bxs-error-circle'></i></label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Min. 3 caracteres y max. 12.</li>
+                                    <li class="message-form">Puede contener  mayúsculas, minúsculas, números y guiones bajos (_).</li>
+                                </ul>
+                            </div>
+                            <input class="u-full-width" type="text" name="username1" placeholder="Usuario" id="usernameImput1" maxlength="15" minlength="3" required>
+                        </div>
+                        <div class="seven columns control-form">
+                            <label for="fullnameImput"><i class='bx bxs-user-detail'></i><i class='bx bxs-error-circle'></i></label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Los nombres deben tener entre 3 caracteres y máx 25 caracteres.</li>
+                                    <li class="message-form">Puede contener mayúsculas, minúsculas y espacios.</li>
+                                </ul>
+                            </div>
+                            <input class="u-full-width" type="text" name="fullname" placeholder="Nombre y apellido" maxlength="25" minlength="3" id="fullnameImput" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="twelve columns control-form">
+                            <label for="emailInput"><i class='bx bxs-envelope'></i><i class='bx bxs-error-circle'></i></label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Debe cumplir con la estructura de un correo (nombre, el arroba y el dominio): example@mi-pagina.ext</li>
+                                </ul>
+                            </div>
+                            <input class="u-full-width" type="email" name="email" placeholder="Correo electrónico" id="emailInput">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="six columns control-form">
+                            <label for="password1Imput"><i class='bx bxs-key'></i><i class='bx bxs-error-circle'></i></label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Al menos 4 caracteres y máx 16.</li>
+                                    <li class="message-form">Puede contener cualquier tipo de caracter, incluyendo números y símbolos.</li>
+                                </ul>
+                            </div>
+                            <input class="u-full-width" type="password" name="password1" placeholder="Contraseña" maxlength="16" minlength="4" id="password1Imput" required>
+                        </div>
+                        <div class="six columns control-form">
+                            <label for="password2Imput"><i class='bx bxs-key'></i><i class='bx bxs-error-circle'></i></label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Debe coincidir con la primera clave</li>
+                                </ul>
+                            </div>
+                            <input class="u-full-width" type="password" name="password2" placeholder="Confirmar contraseña" maxlength="16" minlength="4" id="password2Imput" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="twelve columns control-form">   
+                            <input class="u-full-width" type="file" name="image" accept="image/*" id="imageImput">
+                            <label for="imageImput" class="u-full-width"> 
+                                <div class="two columns">
+                                    <i class='bx bxs-image-add'></i>
+                                </div>
+                                <div class="ten columns">
+                                    <strong>Selecciona una imagen</strong>
+                                    <p></p>
+                                </div>
+                                
+                                <button type="button" class="btn-trash" onclick="trashImage()"><i class='bx bxs-trash'></i></button>
+                                
+                            </label>
+                            <div class="messages-form">
+                                <ul>
+                                    <li class="message-form">Dato no obligatorio.</li>
+                                    <li class="message-form">Tamaño máximo de 2MB.</li>
+                                    <li class="message-form">Tipo de imagen permitido JPEG, JPG, PNG.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <button type="submit" class="btn-submit">Registrarse</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-back">
+    <div class="modal-response">
+        <div class="modal-header">
+            <p>Esto es el título</p>
+            <i class='bx bx-x'></i>
+        </div>
+        <div class="modal-body">
+            <div class="icon"><i class=''></i></div>
+            <p class="text">Esto es el párrafo</p>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block JS %}   
+<script type="text/javascript" src="{{ url_for('static', filename='js/active-buttons-login.js' ) }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/register-fetch.js' ) }}"></script>
+{% endblock %}

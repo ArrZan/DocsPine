@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <h1>{% block titlePlantilla %}
+                
+            {% endblock %}</h1>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block JS %}
+    <script text="type/javascript" src="{{ url_for('static', filename='js/active-button-header.js') }}"></script>
+{% endblock %}

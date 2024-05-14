@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <!-- Configuraciones básicas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Description  se muestra a menudo en los resultados de los motores de búsqueda como resumen de la pagina web -->    
+    <meta name="description" content="Gestión de proyectos, con sistema de puntuación y comentarios.">
+    <meta name="author" content="Grupo Flask">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS Skeleton
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+
+    <!-- CSS Icons 
+    -------------------------------------------------- -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Icono de la pagina
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png')}}">
+
+    <!-- CSS propio y personalizado
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+    {% block customCSS %}   
+    {% endblock %}
+
+    <!-- JS propio y personalizado
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+</head>
+
+<body>
+
+    {% block header %}
+        <header class="header">
+            
+
+            <!-- Acá preguntar si que está autenticado, ponerle el justify content space around-->
+            <div class="row">
+                <div class="five columns">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='images/logo/logo-exampleWhite.png')}}" alt="Logo de Empresa">
+                    </div>
+                </div>
+                
+                {% if current_user.is_authenticated %}
+                <div class="seven columns">
+
+                    <input type="checkbox" id="check-menu">
+                    <label for="check-menu" class="menu">
+                        <i class='bx bx-menu' id="menu-open"></i>
+                        <i class='bx bx-x' id="menu-close"></i>
+                    </label>
+        
+                    <nav class="navbar">
+                        <a href="{{ url_for('home' ) }}" id="bt-pro" style="--i:0">Proyectos</a>
+                        <a href="{{ url_for('misProyectos' ) }}" id="bt-mpro" style="--i:1">Mis proyectos</a>
+                        <a href="{{ url_for('logout') }}" class="close" style="--i:2"><i class='bx bx-log-in' ></i>Cerrar sesión</a>
+                        
+                    </nav>
+                    
+                    <div class="perfil">
+                        <img id="perfil" src="{{ url_for('static', filename=current_user.get_image() )}}" alt="Perfil de usuario">
+                    </div>
+        
+                    <div class="wrapper">
+                        <div class="w-header">
+                            <span>¡Bienvenido, <strong>{{ current_user.fullname }}</strong>!</span>
+                        </div>
+                        <div class="w-content">
+
+                            <div class="wrapper-items">
+
+                                <div class="item"><a href="{{ url_for('home' ) }}">Página principal</a></div>
+                                <div class="item"><a href="{{ url_for('misProyectos' ) }}">Mis proyectos</a></div>
+                                    
+                                <div class="item item-idioma">
+                                    <button class="bt-idioma" id="idioma">
+                                        <span class="bt-idioma">Español</span>
+                                        <i class='bx bx-caret-down bt-idioma'></i>
+                                    </button>
+                                    <ul class="ul-idiomas" id="idiomas" style="display: none;">
+                                        <li class="opcion"><a href="">Español</a></li>
+                                        <li class="opcion"><a href="">Inglés</a></li>
+                                        <li class="opcion"><a href="">Francés</a></li>
+                                        <li class="opcion"><a href="">Italiano</a></li>
+                                        <li class="opcion"><a href="">Portugués</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            
+                            <a href="{{ url_for('logout') }}" id="logout">Cerrar sesión</a>
+
+                        </div>
+                    </div>
+        
+                </div>
+                {% else %}
+                    <div class="control-idioma">
+                        <button class="bt-idioma" id="idioma">
+                            <span class="bt-idioma">es</span>
+                            <i class='bx bx-caret-down bt-idioma'></i>
+                        </button>
+                        <ul class="ul-idiomas" id="idiomas" style="display: none;">
+                            <li class="opcion"><a href="">Español</a></li>
+                            <li class="opcion"><a href="">Inglés</a></li>
+                            <li class="opcion"><a href="">Francés</a></li>
+                            <li class="opcion"><a href="">Italiano</a></li>
+                            <li class="opcion"><a href="">Portugués</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+
+                
+
+            </div>
+
+        </header>
+
+    {% endblock %}
+
+
+
+    <!-- Bloque del body
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    {% block body %}
+    
+    {% endblock %}
+
+    {% block footer %}
+    <footer>
+
+        <div class="container-footer">
+            <div class="row u-full-width">
+                <div class="six columns">
+                    <h3>Nuestro sitio web</h3>
+                    <ul class="list">
+                        <li>Douglas Arguello</li>
+                        <li>Brigner Carriel</li>
+                        <li>Santillán Daniel</li>
+                        <li>Josué Zambrano</li>
+                    </ul>
+                </div>
+                
+                <div class="six columns">
+                    <h3>Información:</h3>
+                    <ul class="list">
+                        <li>UNEMI - Facultad Ciencias de la Ingeniería</li>
+                        <li>Ingeniería en Software 8A1</li>
+                        <li>Desarrollo Web - Proyecto DocsPine</li>
+                        <li>Desarrollo fuera de producción</li>
+                    </ul>
+    
+                    <p class="copyright">Company ACDAZCorp © 2024</p>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+    {% endblock %}
+
+    {% block JS %}
+    {% endblock %}
+
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/idioma.js') }}"></script>        
+    <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>        
+    <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>        
+</body>
+
+</html>
