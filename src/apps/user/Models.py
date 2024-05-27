@@ -53,8 +53,8 @@ class ModelUser():
             hashed_pass = User.generate_password(user, user.password)
             
             # Hacer un trigger para la inserción de estos datos y consultar
-            if user.idioma == 'es':
-                idLanguage = 1
+           # if user.idioma == 'es':
+            idLanguage = 1
 
             # Mandamos la consulta a la bd
             cursor.execute(sql, (idLanguage, user.username, hashed_pass, user.email, user.fullname, user.image))
@@ -101,7 +101,7 @@ class ModelUser():
             cursor=db.connection.cursor()
             
             # Generamos el script para consultar datos del usuario
-            sql ="SELECT ID, NombreUsuario, NombreCompleto, CorreoElectronico, Foto FROM usuarios WHERE ID = '{}'".format(id)
+            sql ="SELECT ID, NombreUsuario, NombreCompleto, CorreoElectronico, Foto, IDLenguaje FROM usuarios WHERE ID = '{}'".format(id)
             
             # Mandamos la consulta a la bd
             cursor.execute(sql)
@@ -114,7 +114,7 @@ class ModelUser():
             # Si existe me devuelve un usuario
             if row != None:
                 # Aquí creamos una instancia con los datos que queremos enviar
-                return User(id=row[0], username=row[1], password=None, fullname=row[2], email=row[3], image=row[4])
+                return User(id=row[0], username=row[1], password=None, fullname=row[2], email=row[3], image=row[4],idioma=row[5])
             else:
                 return None
 

@@ -17,6 +17,8 @@ class LoginView(MethodView):
     def __init__(self, db):
         self.db = db
     
+
+    
     def get(self):
         if current_user.is_authenticated:
             return redirect(url_for('home'))

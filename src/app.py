@@ -6,9 +6,12 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from apps.login.views import LoginView, RegisterView
-
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-
+from apps.project.views import home as proyectos_home
+from apps.project.views import comentar as proyectos_comentar
+from apps.project.views import calificar as proyectos_calificar
+from apps.project.views import re_calificar as proyectos_recalificar
+from apps.project.views import idioma as select_idioma
 # Importaciones propias
 from apps.user.Models import ModelUser
 from apps.user.entities.User import User
@@ -53,7 +56,27 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('proyectos/home.html')
+    return proyectos_home()
+
+#------------------------------------------------------------
+@app.route('/comentar/<string:id>', methods=['POST'])
+def comentar(id):
+    return proyectos_comentar(id)
+
+@app.route('/calificar/<string:id>', methods=['POST'])
+def calificar(id):
+    return proyectos_calificar(id)
+
+@app.route('/re_calificar/<string:id_pro>/<string:id_ca>', methods=['POST'])
+def re_calificar(id_pro,id_ca):
+    return proyectos_recalificar(id_pro,id_ca)
+
+@app.route('/idioma/', methods=['POST'])
+def idioma():
+    return select_idioma()
+
+#------------------------------------------------------------
+
 
 @app.route('/mis-proyectos')
 @login_required
@@ -77,4 +100,3 @@ if __name__=='__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()
-    
