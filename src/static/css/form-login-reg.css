@@ -1,0 +1,443 @@
+
+.container {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    border: 1px solid var(--cl-contour);
+    width: 34%;
+    padding: 0;
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--cl-form);
+    transition: .4s ease-in-out;
+}
+
+#form-container,
+.submit,
+.twelve.twelve.columns input {
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--cl-contour);
+    margin-bottom: 5px;
+}
+
+#logo img {
+    height: 140px;
+    transition: .4s ease-in-out;
+
+}
+
+#header-form h6 {
+    padding: 5px 0 5px 0;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+    user-select: none;
+}
+
+#header-form div {
+    color: var(--cl-primary);
+    background-color: var(--cl-secundary);
+    border-bottom: 1px solid var(--cl-contour);
+}
+
+#header-form .seven.columns {
+    border-top-left-radius: 10px;
+}
+
+#header-form .five.columns {
+    border-top-right-radius: 10px;
+}
+
+#header-form .header-active {
+    background-color: var(--cl-form);
+    border-bottom: 0;
+}
+
+
+#header-form .header-active h6 {
+    font-weight: bold;
+    cursor: default;
+    color: var(--cl-primary-dark);
+}
+
+#header-form .seven.columns {
+    border-right: 1px solid var(--cl-contour);
+}
+
+#header-form .five.columns,
+#header-form .seven.columns {
+    margin-left: 0;
+}
+
+/* Messages del form login & Register
+----------------------------------------------------------------- */
+.messages-bd {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height .5s ease-out, opacity .5s ease-out;
+}
+
+.messages-bd.show {
+    height: 38px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.messages-bd, .row.message {
+    margin-bottom: 0;
+}
+
+/* .messages-bd.hide ~ .row {
+    transition: all .5s ease-out;
+} */
+
+.row.message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding : 7px;
+    color: var(--cl-primary-dark);
+    background-color: var(--cl-error);
+    border-radius: 7px;
+}
+
+.messages-bd i {
+    font-size: 24px;
+}
+
+.messages-bd p {
+    margin: 0;
+}
+
+.messages-bd .ten.columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-msg:hover {
+    border-radius: 4px;
+    background-color: var(--cl-error-dark);
+    color: var(--cl-form);
+}
+
+.close-msg:active {
+    color: var(--cl-error);
+}
+
+.two.columns {
+    display: flex;
+    justify-content: center;
+}
+
+.ten.columns {
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Body del form de login
+----------------------------------------------------------------- */
+#body-form,
+.container #header-form,
+.btn-submit {
+    margin-bottom: 0;
+}
+
+#body-form {
+    padding: 0 25px 20px 25px;
+}
+
+#body-login.active,
+#body-register.active {
+    display: block;
+}
+
+form {
+    margin: 0;
+    display: none;
+}
+
+.row .twelve.columns {
+    text-align: center;
+}
+
+.row .twelve.columns h5 {
+    font-weight: bold;
+    margin: 6px 0;
+    color: var(--cl-primary);
+}
+
+.btn-submit {
+    border: 0;
+    width: 70%;
+    text-transform: capitalize;
+    font-size: 1em;
+    color: var(--cl-form);
+    background-color: var(--cl-primary);
+}
+
+.control-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.messages-form {
+    position: absolute;
+    text-align: left;
+    bottom: 62px;
+    left: 0;
+    z-index: 1;
+    width: 300px;
+    font-weight: bold;
+    height: auto;
+    background-color: var(--cl-error);
+    border-radius: 4px;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease-in;
+}
+
+.message-form,
+.messages-form ul {
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+/* Mostrador Genérico de los mensajes de error */
+.control-form.error label:hover + .messages-form {
+    bottom: 58px;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Mostrador para la info de la imagen */
+#imageImput + label:hover + .messages-form {
+    bottom: 58px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.control-form label {
+    height: 36px;
+    padding: 0 5px;
+    background-color: #fff;
+    color: var(--cl-primary);
+    border: 1px solid #D1D1D1;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right: 0;
+    font-size: 21px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.control-form input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.control-form input:focus {
+    border: 1px solid var(--cl-secundary);
+}
+
+.btn-submit:hover {
+    color: var(--cl-form);
+    background-color: var(--cl-primary-dark);
+}
+
+.btn-submit:focus {
+    color: var(--cl-primary);
+    background-color: var(--cl-secundary);
+}
+
+.btn-trash {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    margin-left: 4%;
+    padding: 0;
+    margin-bottom: 0;
+    color: var(--cl-primary);
+    background-color: var(--cl-error);
+    display: none;
+}
+
+.btn-trash.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-trash:hover {
+    color: var(--cl-form);
+    background-color: var(--cl-error-dark);
+}
+
+#imageImput + label .ten.columns {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#imageImput {
+    display: none;
+}
+
+#imageImput ~ .messages-form {
+    background-color: var(--cl-secundary);
+}
+
+.control-form p,
+.control-form strong {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 14px;
+
+}
+
+#imageImput + label:hover {
+    cursor: pointer;
+    background-color: var(--cl-bgcolor-dark);
+}
+
+#imageImput + label {
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+/* vista de validaciones del formulario
+----------------------------------------------------------------- */
+.control-form.error input,
+.control-form.error label {
+    border-color: var(--cl-error-dark);
+}
+
+.control-form.error i {
+    color: var(--cl-error-dark);
+    animation: error-control-form 1s infinite alternate;
+}
+
+.control-form.error.error-flush i {
+    animation: alarm-error 1.3s;
+}
+
+.control-form.exito input,
+.control-form.exito label {
+    border-color: var(--cl-exito);
+}
+
+.control-form.exito i {
+    color: var(--cl-exito);
+}
+
+.bxs-error-circle {
+    display: none;
+}
+
+
+/* Hacemos una animación para llamar la atención del usuario al tener un error en sus controladore */
+@keyframes error-control-form {
+    0% {
+        transform: scale(1);
+        animation-timing-function: ease-in-out;
+    }
+    50% {
+        transform: scale(1.2);
+        animation-timing-function: ease-in-out;
+    }
+    100% {
+        transform: scale(1);
+        animation-timing-function: ease-in-out;
+    }
+}
+
+@keyframes alarm-error {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: scale(1.5) rotate(25deg);
+    }
+    20%, 40%, 60%, 80% {
+        transform: scale(1.5) rotate(-25deg);
+    }
+}
+
+
+
+/* QUERIES
+----------------------------------------------------------------- 
+----------------------------------------------------------------- */
+@media (max-width: 1000px) {
+    #form-container.container {
+        width: 47%;
+        transition: .4s ease-in-out;
+    }
+
+}
+
+@media (max-width: 750px) {
+    #form-container.container {
+        width: 65%;
+        transition: .4s ease-in-out;
+    }
+    
+
+}
+
+@media (max-width: 550px) {
+
+    #logo img {
+        height: 100px;
+        transition: .4s ease-in-out;
+    }
+
+    #form-container.container {
+        width: 85%;
+        transition: .4s ease-in-out;
+    }
+
+    #header-form .seven.columns {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 0;
+    }
+
+    #header-form .five.columns {
+        border-radius: 0;
+    }
+
+    
+
+}
+
+@media (min-width: 550px) {
+    /* Estos dos fragmentos son para reeditar y que quepe completamente sin el margin-left */
+    #header-form .five.columns {
+        width: 43.3333333333%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #form-container.container {
+        width: 90%;
+        transition: .4s ease-in-out;
+    }
+
+}

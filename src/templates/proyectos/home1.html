@@ -1,0 +1,72 @@
+{% extends "proyectos/base-proyecto.html" %}
+
+{% block title %}DocsPine{% endblock %}
+
+{% block filters %}
+    <div class="row filter">
+
+        <div class="filter-type">
+            <div class="select-cont">
+                <button class="select-bt" >
+                    <span class="select-he">Español</span>
+                    <i class='bx bx-caret-down'></i>
+                </button>
+                <ul class="select-op" style="display: none;">
+                    <li class="opcion"><a href="">Español</a></li>
+                    <li class="opcion"><a href="">Inglés</a></li>
+                    <li class="opcion"><a href="">Francés</a></li>
+                    <li class="opcion"><a href="">Italiano</a></li>
+                    <li class="opcion"><a href="">Portugués</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block lista %}
+{% for proyectos in data %}
+    <div class="row card">
+        <div class="card-point">
+            <div class="ol po-star">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+            </div>
+            <p class="po-digit">/5</p>
+        </div>
+        <div class="row card-content">
+            <div class="three columns">
+                <div class="cont-img">
+                    <img src="{{proyectos[6] or url_for('static', filename='images/default/nonimage.svg') }}" alt="Imagen de proyecto">
+                </div>
+            </div>
+            <div class="nine columns">
+                <div class="cont-text">
+                    <div class="cont-title">
+                        <h5> {{ proyectos[3] }}</h5>
+                    </div>
+                    <div class="cont-autor">
+                        <h6><strong>Autor: </strong>{{ proyectos[2] }}</h6>
+                    </div>
+                    <div class="cont-desc">
+                        <p>{{ proyectos[4] }}</p>
+                        <div class="num-files">
+                            <i class='bx bxs-file'></i>
+                            <p>5 archivos cargados.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cont-button">
+                    <div class="inf-mess">
+                        <i class='bx bxs-chat'></i>
+                        <i>34 personas están hablando de esto!</i>
+                    </div>
+                    <button class="cont-btn">Ver proyecto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

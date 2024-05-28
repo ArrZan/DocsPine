@@ -1,0 +1,287 @@
+#liDocs {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+#liDocs > div > .columns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#liDocs > div > .nine {
+    flex-direction: column;
+}
+
+/* ---------------------------------------------------FILTER */
+.filter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color: var(--cl-form);
+    border-radius: 8px;
+    height: 250px;
+    width: 75%;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+}
+
+
+.filter-type {
+    width: 100%;
+    margin: 5% 0;
+    margin-bottom: 0;
+    display: inherit;
+    justify-content: center;
+}
+/* 
+.select-cont {
+    width: 100%;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-cont:hover {
+    background-color: var(--cl-bgcolor);
+}
+
+.select-bt {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    text-transform: capitalize;
+    font-weight: normal;
+    background-color: var(--cl-form);
+    margin-bottom: 0;
+    border: 0;
+}
+
+.select-bt:hover {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.select-bt span {
+    margin-left: 3px;
+}
+
+.select-bt i {
+    font-size: 18px;
+    transition: all .3s;
+}
+
+.select-op {
+    padding-left: 0;
+    list-style: none;
+    cursor: default;
+    z-index: 7;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background-color: var(--cl-form);
+    border-radius: 4px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+}
+
+.select-op li {
+    margin-bottom: 0;
+    padding: 4px 7px;
+}
+
+.select-op li:hover {
+    background-color: var(--cl-bgcolor-dark);
+}
+
+.select-op li a {
+    color: var(--cl-primary);
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.select-bt.rotated i {
+    transform: rotate(180deg);
+} */
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------------CARD */
+.card {
+    border-radius: 8px;
+    width: 90%;
+    position: relative;
+    border: 0;
+    margin: 20px 20px 40px 20px;
+    height: 290px;
+    background-color: var(--cl-form);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+}
+
+.card-point {
+    position: absolute;
+    display: flex;
+    border-radius: 8px;
+    background-color: var(--cl-secundary);
+    padding: 4px 15px;
+    right: 12px;
+    top: -14px;
+}
+
+.po-digit {
+    margin-bottom: 0;
+}
+
+.po-star .bxs-star {
+    color: var(--cl-primary);
+}
+
+.po-star i:hover {
+    color: var(--cl-form);
+}
+
+.card-content,
+.card-content > div,
+.cont-img {
+    height: 100%;
+}
+
+
+.cont-img {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cl-secundary);
+    color: var(--cl-primary);
+}
+
+.cont-img i {
+    font-size: 20rem;
+}
+
+.cont-img img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content .nine.columns {
+    padding: 20px 14px;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cont-text .cont-title h5 {
+    font-weight: bold;
+}
+
+.num-files {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    color: var(--cl-form);
+    background-color: var(--cl-secundary);
+    padding: 0 5px;
+    width: fit-content;
+    user-select: none;
+}
+
+    /* .num-files:hover{
+        background-color: var(--cl-primary);
+    } */
+
+.num-files p {
+    margin-bottom: 0;
+}
+
+.inf-mess {
+    display: flex;
+    align-items: center;
+}
+
+.inf-mess i {
+    color: var(--cl-secundary);
+    font-weight: 500;
+    transition: .3s ease;
+}
+
+.inf-mess > :first-child,
+.num-files i {
+    margin-right: 5px;
+}
+
+.inf-mess:hover i {
+    color: var(--cl-secundary-dark);
+}
+
+
+.cont-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cont-btn {
+    margin-bottom: 0;
+    background-color: var(--cl-bgcolor);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+    transition: .3s ease-out;
+}
+
+.cont-btn:hover {
+    background-color: var(--cl-primary);
+    color: var(--cl-form);
+}
+
+.cont-btn:active {
+    background-color: var(--cl-bgcolor);
+    color: var(--cl-primary);
+}
+
+/* Mobile first queries */
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+    
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+    .card-content > .nine.columns {
+        width: 78%;
+    }
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+
+}

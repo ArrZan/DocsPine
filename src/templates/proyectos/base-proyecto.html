@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+    
+    <div class="container" id="liDocs">
+        <div class="row">
+            <div class="three columns">
+                {% block filters %}
+                    
+                {% endblock %}
+            </div>
+            <div class="nine columns">
+                {% block lista %}
+                    
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block JS %}
+    <script text="type/javascript" src="{{ url_for('static', filename='js/active-button-header.js') }}"></script>
+{% endblock %}

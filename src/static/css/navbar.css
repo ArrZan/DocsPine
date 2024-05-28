@@ -1,0 +1,308 @@
+body {
+    background-color: var(--cl-bgcolor);
+    min-height: 100vh;
+}
+
+.header {
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 57px;
+    padding: 20px 100px;
+    background-color: var(--cl-primary);
+    border-bottom: 4px solid var(--cl-secundary);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+    transition: .4s ease-in-out;
+}
+
+.header .row:after {
+    content: none;
+}
+
+.header .row {
+    width: 100%;
+    justify-content: space-between; /* Habilitar solo si está autenticado */
+    display: flex;
+}
+
+.header .row .seven {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+#logoNav {
+    display: flex;
+    color: var(--cl-form);
+    align-items: center;
+    user-select: none;
+}
+
+#logoNav p {
+    font-size: 18px;
+    color: var(--cl-bgcolor);
+    margin-bottom: 0;
+    font-weight: bold;
+    letter-spacing: 5px;
+    user-select: none;
+}
+
+#logoNav img {
+    height: 40px;
+    width: auto;
+    padding: 5px;
+}
+
+.navbar > a {
+    position: relative;
+    color: var(--cl-form);
+    font-size: 1em;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.navbar .close {
+    display: none;
+}
+
+.navbar a i {
+    margin-right: 7px;
+}
+
+/* Parte del perfil y su wrapper
+------------------------------------------------------------------------- */
+.wrapper {
+    position: absolute;
+    background-color: var(--cl-bgcolor);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+    border-color: var(--cl-form);
+    border-radius: 7px;
+    right: calc(10% + 15px);
+    width: 250px;
+    top: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 5;
+    user-select: none;
+    transition:  opacity .6s ease, visibility 0s .6s, top .6s, height .6s ease;
+}
+
+.show-wrapper {
+    top: 20px;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    transition:  all .6s ease;
+}
+
+.wrapper .w-header {
+    margin: 10px 10px 0 10px;
+    border-bottom: 1px solid var(--cl-contour);
+    
+}
+
+.wrapper .w-content {
+    margin: 0 10px 10px 10px;
+}
+
+.wrapper-items {
+    font-size: 13px;
+    border-bottom: 1px solid var(--cl-contour);
+    margin: 0 0 7px 0;
+}
+
+
+.wrapper-items .item {
+    cursor: pointer;
+    padding: 5px 0;
+    transition: background-color .3s;
+}
+
+.item a{
+    color: var(--cl-secundary-dark);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper-items .item:hover {
+    background-color: var(--cl-bgcolor-dark);
+}
+
+#logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    color: var(--cl-form);
+    background-color: var(--cl-secundary);
+    border-color: var(--cl-bgcolor-dark);
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 0;
+    transition: .3s ease;
+}
+
+#logout:hover {
+    background-color: var(--cl-secundary-dark);
+}
+
+#check-menu {
+    display: none;
+}
+
+.menu {
+    display: none;
+    align-items: center;
+    position: absolute;
+    font-size: 2em;
+    color: var(--cl-form);
+    cursor: pointer;
+    margin-bottom: 0;
+    right: 5%;
+}
+
+.navbar a::before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    height: 4px;
+    background-color: var(--cl-primary);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+    transition: .3s;
+}
+
+.navbar a.active::before,
+.navbar a:hover::before {
+    opacity: 1;
+}
+
+.perfil {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    /* border: 2px solid var(--cl-form); */
+    background-color: var(--cl-contour);
+}
+
+.perfil img {
+    width: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.perfil img:hover {
+    transform: scale(1.15);
+}
+
+
+/* Queriiies
+----------------------------------------------------------- */
+@media (max-width: 1200px) {
+
+    .wrapper {
+        right: calc(13% + 10px);
+        /* transition:  opacity .6s ease, visibility 0s .6s, top .6s, height .6s ease; */
+}
+}
+
+@media (max-width: 1000px) {
+    
+    .wrapper {
+        right: calc(9% + 15px);
+        transition:  all .6s ease;
+    }
+    
+
+    .header {
+        transition: .4s ease-in-out;
+        padding: 1.5em 5%;
+    }
+}
+
+@media (max-width: 750px) {
+    .wrapper {
+        opacity: 0;
+    }
+
+    .menu{
+        display: inline-flex;
+    }
+
+    /* El símbolo ~ es para tomar las etiquetas que preceden del check,
+    en este caso el menu-open */
+    #check-menu:checked~.menu #menu-open {
+        display: none;
+    }
+
+    .menu #menu-close {
+        display: none;
+    }
+
+    #check-menu:checked~.menu #menu-close {
+        display: block;
+    }   
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        background-color: var(--cl-secundary);
+        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+        transition: .3s ease;
+        z-index: 1;
+    }
+    
+    #check-menu:checked~.navbar {
+        height: 16em;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 1.2em;
+        text-align: center;
+        transform: translateY(-50px);
+        transition: .3s ease;
+        opacity: 0;
+    }
+    
+    #check-menu:checked~.navbar a {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: calc(.15s * var(--i));
+    }
+    
+    .navbar .close {
+        display: block;
+    }
+    
+    .perfil {
+        display: none;
+    }
+
+    .perfil img {
+        margin-right: 10px;
+    }
+}
+

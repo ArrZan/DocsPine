@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Web</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="box-1"> 
+      <ol>
+          <li><a href="#">Proyectos</a></li>
+          <li><a href="#">Mis Proyectos</a></li>
+          <li style="float: right;"><a class="active" href="#">Login</a></li>
+      </ol>
+    </div>
+    <div class="box-2">
+      <div class="filtro">
+          <label >Filtro de puntuación:</label>
+          <select>
+              <option value="Alta">Alta</option>
+              <option value="Media">Media</option>
+              <option value="Baja">Baja</option>
+              <option value="Sin puntuar">Sin puntuar</option>
+          </select>
+      </div>
+    </div>
+    {% for proyectos in data %}
+    <section>
+
+    </section>
+    <div class="box-3">
+        <div class="pinfo">
+            <div class="pimagen">
+                <img src="{{ proyectos[6] or 'https://cdn-icons-png.flaticon.com/512/16/16410.png' }}" alt="img">
+            </div>
+            <div class="pdetails">
+                <div class="prating">
+                    <div class="stars">
+                        <span class="star" data-rating="1">☆</span>
+                        <span class="star" data-rating="2">☆</span>
+                        <span class="star" data-rating="3">☆</span>
+                        <span class="star" data-rating="4">☆</span>
+                        <span class="star" data-rating="5">☆</span>
+                    </div>
+                </div>
+                <div class="descp">
+                    <p><strong>Nombre del Proyecto:</strong> {{ proyectos[3] }}</p>
+                    <p><strong>Autor:</strong> {{ proyectos[2] }}</p>
+                    <p><strong>Fecha de creación:</strong> {{ proyectos[5] }}</p>
+                    <p><strong>Descripción del Proyecto:</strong> {{ proyectos[4] }}</p>
+                </div>
+                <div class="pverb">
+                    <button>Ver Proyecto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!--<div class="box-4">
+      <p>Pie de pagina</p>
+    </div>-->
+    <script>
+      $(document).ready(function(){
+          $('.star').on('click', function(){
+              var rating = $(this).data('rating');
+              $('#selected-rating').val(rating);
+              $('.star').removeClass('selected');
+              $(this).prevAll('.star').addBack().addClass('selected');
+          });
+      });
+    </script>
+</body>
+</html>

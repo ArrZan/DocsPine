@@ -1,0 +1,159 @@
+.modal-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5); /* Damos transparencia */
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+.modal-back.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-back.active .modal-response {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-response {
+    top: -10;
+    opacity: 0;
+    visibility: hidden;
+    position: relative;
+    width: 400px;
+    height: auto;
+    transition: all .6s .4s ease-out;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    background-color: var(--cl-form);
+}
+
+
+/*------------------------------------------------------------------ Header Modal*/
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--cl-bgcolor);
+    font-size: 2rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.modal-header p {
+    padding: 10px 10px 5px 10px;
+    margin-bottom: 0;
+}
+
+.modal-header i {
+    background-color: var(--cl-bgcolor-dark);
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+
+/* ---------------- Clases de error y éxito ---------------- */
+.modal-response.exito .modal-header p {
+    color: var(--cl-exito-dark);
+}
+
+.modal-response.error .modal-header p {
+    color: var(--cl-error-dark);
+}
+
+
+/* ----------------- Focus, hover y de más ----------------- */
+.modal-header i:hover {
+    background-color: var(--cl-error);
+    cursor: pointer;
+}
+
+.modal-header i:active {
+    color: var(--cl-form);
+    background-color: var(--cl-error-dark);
+    cursor: pointer;
+}
+
+/*------------------------------------------------------------------- Body Modal */
+.modal-body {
+    display: flex;
+    padding: 20px;
+}
+
+
+.modal-body .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-body i {
+    font-size: 50px;
+    margin-right: 15px;
+}
+
+
+/* ---------------- Clases de error y éxito ---------------- */
+.modal-response.exito .modal-body i {
+    color: var(--cl-exito);
+}
+
+.modal-response.error .modal-body i {
+    color: var(--cl-error);
+}
+
+
+/* ----------------- Focus, hover y de más ----------------- */
+
+/*----------------------------------------------------------------- Footer Modal */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-bottom: 20px;
+}
+
+
+/* ---------------- Clases de error y éxito ---------------- */
+
+
+/* ----------------- Focus, hover y de más ----------------- */
+
+
+
+
+/* Queriiies
+----------------------------------------------------------- */
+@media (max-width: 1000px) {
+    .modal-response {
+        width: 450px;
+    }
+}
+
+@media (max-width: 750px) {
+    .modal-response {
+        width: 350px;
+    }
+}
+
+@media (max-width: 400px) {
+    .modal-response {
+        width: 300px;
+    }
+}
+
