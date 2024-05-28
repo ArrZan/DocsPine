@@ -7,7 +7,6 @@ from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from apps.login.views import LoginView, RegisterView
 
-
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 # Importaciones propias
