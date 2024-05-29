@@ -1,0 +1,87 @@
+{% extends "proyectos/base-proyecto.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block customCSS %}   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
+{% endblock %}
+
+{% block titlePlantilla %}
+    EDITAR PROYECTO
+    <!-- contenido de la pagina FORMULARIO-->
+    <div class="container">
+        <h1>EDITAR DE PROYECTO</h1>
+        <hr>
+        <form action="/actualizar_proyecto" method="POST" enctype="multipart/form-data">
+            <div class="formulario">
+                <div class="form-column-1">
+                    <h5 style="padding: 0.2rem;">Imágen</h5>
+                    <label for="Imagen" class="cursor-pointer" title="Haz clic para cambiar la foto">
+                        <img class="img-fluid" 
+                        src="{% if proyecto.Imagen %}data:image/jpeg;base64,{{ proyecto.Imagen }}{% else %}{{ url_for('static', filename='img/books_1.png') }}{% endif %}" 
+                        id="img" alt="avatar" style="cursor: pointer; width: 250px; height: 250px;" onclick="cambiarFoto()">
+                    </label>
+                    <input type="file" name="Imagen" id="Imagen" hidden accept="image/*" onchange="return validarExtImagen(this)">
+                </div>
+                <div class="form-column-2">
+                    <div class="label-input-container">
+                        <label for="NombreProyecto">Título</label>
+                        <input class="box" type="text" name="NombreProyecto" autocomplete="off" required value="{{ proyecto.NombreProyecto }}">
+                    </div>
+                    <div class="label-input-container">
+                        <label for="DescripcionProyecto">Descripción</label>
+                        <textarea class="box" name="DescripcionProyecto" id="DescripcionProyecto" cols="30" rows="2" required>{{ proyecto.DescripcionProyecto }}</textarea>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="Fecha">Fecha</label>
+                        <input class="box" type="date" name="Fecha" autocomplete="off" required value="{{ proyecto.Fecha }}">
+                    </div>
+                    <div class="label-input-container">
+                        <label for="NombreUsuario">Autor</label>
+                        <!-- el campo del usuario sea de solo lectura y agrega un campo oculto para enviar el ID del usuario. -->
+                        <input class="box" type="text" name="NombreUsuario" autocomplete="off" value="{{ proyecto.NombreUsuario }}" disabled readonly>
+                        <input type="hidden" name="IDUsuario" value="{{ proyecto.IDUsuario }}">
+                    </div>
+                    <!-- Incluir el ID del proyecto como campo oculto -->
+                    <input type="hidden" name="ID" value="{{ proyecto.ID }}">
+                </div>
+            </div>
+            <!-- En el template editar_proyecto.html -->
+            <h5>Archivos</h5>
+            <div class="container-upload">
+                <input type="file" class="" id="file" hidden name="Archivo" onchange="return validarExt()" multiple>
+                <label for="file" class="uploadlabel">
+                    <span>
+                        <img src="{{ url_for('static', filename='img/addthis_3.png') }}" alt="">
+                    </span>
+                    <p>Agregar</p>
+                </label>
+                <br>
+                <div id="filewrapper">
+                    <h5 class="uploaded">Documentos cargados</h5>
+                    {% for archivo in proyecto.Archivos %}
+                        <div class="showfilebox archivo-item">
+                            <div class="left">
+                                <span class="filetype">{{ archivo.split('.')[-1] }}</span>
+                                <h3>{{ archivo }}</h3>
+                            </div>
+                            <div class="right">
+                                <span class="eliminar-archivo" data-archivo="{{ archivo }}">&#215;</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr>
+            <div class="btn-container">
+                <button type="submit" class="btn">Aceptar</button>
+                <a href="{{ url_for('litadoTrabajo') }}" class="btn" onclick="return confirm('¿Estás seguro de cancelar?')">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+
+{% block JS %}
+    <script src="{{ url_for('static', filename='js/subir_archivo.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "proyectos/base-proyecto.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block customCSS %}   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
+{% endblock %}
+
+{% block titlePlantilla %}
+    Plantilla de Todos los Proyectos
+    <!-- contenido de la pagina FORMULARIO-->
+    <div id="form-project" class="container">
+        <h1>CREACIÓN DE PROYECTO</h1>
+        <hr>
+        <form action="/registrar" method="POST" enctype="multipart/form-data">
+            <div class="formulario">
+                <div class="form-column-1">
+                    <h5 style="padding: 0.2rem;">Imágen</h5>
+                    <input type="file" name="Imagen" id="Imagen" hidden accept="image/*" onchange="return validarExtImagen(this)">
+                    <label for="Imagen" class="cursor-pointer" title="Haz clic para cambiar la imagen">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/proyecto/upload_img1.png') }}" id="img" alt="avatar" style="cursor: pointer; width: 250px; height: 250px;">
+                    </label>
+                </div>
+                <div class="form-column-2">
+                    <div class="label-input-container">
+                        <label for="NombreProyecto">Título</label>
+                        <input class="box" type="text" name="NombreProyecto" autocomplete="off" required>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="DescripcionProyecto">Descripción</label>
+                        <textarea class="box" name="DescripcionProyecto" id="DescripcionProyecto" cols="30" rows="2" required></textarea>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="Fecha">Fecha</label>
+                        <input class="box" type="date" name="Fecha" autocomplete="off" required>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="IDUsuario">Autor</label>
+                        <select class="box select" name="IDUsuario" required >
+                            <!-- <option value="">Seleccione un autor</option> -->
+                            {% for usuario in usuarios %}
+                                <!-- <option value="{{ usuario[0] }}">{{ usuario[1] }}</option> -->
+                                {% if loop.index == 4 %}
+                                    <option value="{{ usuario[0] }}" selected>{{ usuario[1] }}</option>
+                                {% else %}
+                                    <option value="{{ usuario[0] }}">{{ usuario[1] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <h5>Archivos</h5>
+            <div class="container-upload">
+                <input type="file" class="" id="file" hidden name="Archivo" onchange="return validarExt()" required multiple> <!-- Permite seleccionar múltiples archivos -->
+                <label for="file" class="uploadlabel">
+                    <span>
+                        <img src="{{ url_for('static', filename='images/proyecto/addthis_3.png') }}" alt="">
+                    </span>
+                    <p>Agregar</p>
+                </label>
+                <div id="filewrapper">
+                    <h5 class="uploaded">Documentos cargados</h5>
+                    <!-- COMENTAR-->
+                    <div class="showfilebox">
+                        <div class="left">
+                            <span class="filetype">Excel</span>
+                            <h3>Ravi .pdf</h3>
+                        </div>
+                        <div class="right">
+                            <span>&#215;</span>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="btn-container">
+                <button type="submit" class="btn">ACEPTAR</button>
+                <a href="{{ url_for('litadoTrabajo') }}" class="btn" onclick="return confirm('¿Estás seguro de cancelar?')">CANCELAR</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block JS %}
+    <script src="{{ url_for('static', filename='js/subir_archivo.js') }}"></script>
+{% endblock %}
