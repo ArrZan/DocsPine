@@ -54,7 +54,7 @@ def logout():
 @login_required
 def home():
     data = {}
-    return render_template('proyectos/home1.html',data=listar_proyectos())
+    return render_template('proyectos/List_Proyectos.html',data=listar_proyectos())
 
 @app.route('/mis-proyectos')
 @login_required
