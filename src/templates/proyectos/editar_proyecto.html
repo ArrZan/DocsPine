@@ -9,7 +9,7 @@
 {% block titlePlantilla %}
     EDITAR PROYECTO
     <!-- contenido de la pagina FORMULARIO-->
-    <div class="container">
+    <div id="form-project" class="container">
         <h1>EDITAR DE PROYECTO</h1>
         <hr>
         <form action="/actualizar_proyecto" method="POST" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
                     <h5 style="padding: 0.2rem;">Imágen</h5>
                     <label for="Imagen" class="cursor-pointer" title="Haz clic para cambiar la foto">
                         <img class="img-fluid" 
-                        src="{% if proyecto.Imagen %}data:image/jpeg;base64,{{ proyecto.Imagen }}{% else %}{{ url_for('static', filename='img/books_1.png') }}{% endif %}" 
+                        src="{% if proyecto.Imagen %}data:image/jpeg;base64,{{ proyecto.Imagen }}{% else %}{{ url_for('static', filename='images/proyecto/upload_img1.png') }}{% endif %}" 
                         id="img" alt="avatar" style="cursor: pointer; width: 250px; height: 250px;" onclick="cambiarFoto()">
                     </label>
                     <input type="file" name="Imagen" id="Imagen" hidden accept="image/*" onchange="return validarExtImagen(this)">
@@ -52,7 +52,7 @@
                 <input type="file" class="" id="file" hidden name="Archivo" onchange="return validarExt()" multiple>
                 <label for="file" class="uploadlabel">
                     <span>
-                        <img src="{{ url_for('static', filename='img/addthis_3.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='images/proyecto/addthis_3.png') }}" alt="">
                     </span>
                     <p>Agregar</p>
                 </label>
