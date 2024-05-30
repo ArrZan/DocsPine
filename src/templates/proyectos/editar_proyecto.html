@@ -1,6 +1,6 @@
 {% extends "proyectos/base-proyecto.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Editar Proyecto{% endblock %}
 
 {% block customCSS %}   
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
@@ -34,12 +34,12 @@
                     </div>
                     <div class="label-input-container">
                         <label for="Fecha">Fecha</label>
-                        <input class="box" type="date" name="Fecha" autocomplete="off" required value="{{ proyecto.Fecha }}">
+                        <input class="box" type="date" name="Fecha" autocomplete="off" required value="{{ proyecto.Fecha }}" readonly>
                     </div>
                     <div class="label-input-container">
                         <label for="NombreUsuario">Autor</label>
                         <!-- el campo del usuario sea de solo lectura y agrega un campo oculto para enviar el ID del usuario. -->
-                        <input class="box" type="text" name="NombreUsuario" autocomplete="off" value="{{ proyecto.NombreUsuario }}" disabled readonly>
+                        <input class="box" type="text" name="NombreUsuario" autocomplete="off" value="{{ proyecto.NombreUsuario }}" readonly>
                         <input type="hidden" name="IDUsuario" value="{{ proyecto.IDUsuario }}">
                     </div>
                     <!-- Incluir el ID del proyecto como campo oculto -->
