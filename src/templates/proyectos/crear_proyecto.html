@@ -1,6 +1,6 @@
 {% extends "proyectos/base-proyecto.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Crear Proyecto{% endblock %}
 
 {% block customCSS %}   
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
@@ -32,19 +32,19 @@
                     </div>
                     <div class="label-input-container">
                         <label for="Fecha">Fecha</label>
-                        <input class="box" type="date" name="Fecha" autocomplete="off" required>
+                        <input class="box" type="date" value="{{ fecha_actual }}" name="Fecha" autocomplete="off" required>
                     </div>
                     <div class="label-input-container">
                         <label for="IDUsuario">Autor</label>
                         <select class="box select" name="IDUsuario" required >
                             <!-- <option value="">Seleccione un autor</option> -->
                             {% for usuario in usuarios %}
-                                <!-- <option value="{{ usuario[0] }}">{{ usuario[1] }}</option> -->
-                                {% if loop.index == 4 %}
+                                <option value="{{ usuario[0] }}">{{ usuario[1] }}</option>
+                                <!-- {% if loop.index == 4 %}
                                     <option value="{{ usuario[0] }}" selected>{{ usuario[1] }}</option>
                                 {% else %}
                                     <option value="{{ usuario[0] }}">{{ usuario[1] }}</option>
-                                {% endif %}
+                                {% endif %} -->
                             {% endfor %}
                         </select>
                     </div>
