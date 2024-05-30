@@ -62,7 +62,11 @@ def crear_proyecto():
     cursor.execute("SELECT ID, NombreUsuario FROM Usuarios") # Obtener los usuarios y sus IDs
     usuarios = cursor.fetchall() # Obtener todos los resultados de la consulta
     cursor.close()
-    return render_template('proyectos/crear_proyecto.html', usuarios=usuarios)
+
+    # Obtener la fecha actual
+    fecha_actual = datetime.now().strftime('%Y-%m-%d')
+    
+    return render_template('proyectos/crear_proyecto.html', usuarios=usuarios, fecha_actual=fecha_actual)
 
 # Guardar los registros/proyectos
 def formAddTrabajo():
@@ -70,7 +74,7 @@ def formAddTrabajo():
     imagen               = request.files['Imagen'].read() # Leer la imagen del formulario
     nombre_proyecto      = request.form['NombreProyecto']
     descripcion_proyecto = request.form['DescripcionProyecto']
-    fecha                = request.form['Fecha']
+    fecha                = request.form.get('Fecha')
     usuario              = request.form['IDUsuario']
     archivos             = request.files.getlist('Archivo')
 
