@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocsPine - Página no encontrada</title>
+
+        <!-- CSS Skeleton
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+
+    <!-- Icono de la pagina
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='svg/logo pagina/logo.svg')}}">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        img {
+            width: 500px;
+        }
+
+        h3 {
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .container {
+            display: inherit;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body >
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/default/error_404.svg')}}" alt="Error 404">
+        <h3>¡Página no encontrada!</h3>
+        <p>Lo sentimos, la página que buscas no está disponible.</p>
+        <a href="{{ url_for('mis_Proyectos' ) }}">Volver al Inicio</a>
+    </div>
+</body>
+</html>

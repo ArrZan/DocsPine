@@ -1,0 +1,386 @@
+#liDocs {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+
+#liDocs > div > .columns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#liDocs > div > .nine {
+    flex-direction: column;
+}
+
+/* ---------------------------------------------------FILTER */
+.filter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color: var(--cl-form);
+    border-radius: 8px;
+    height: 250px;
+    width: 75%;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+}
+
+
+.filter-type {
+    width: 100%;
+    margin: 5% 0;
+    margin-bottom: 0;
+    display: inherit;
+    justify-content: center;
+}
+
+form {
+    text-align: center;
+}
+
+#order_by {
+    width: 100%;
+}
+
+
+
+
+/* ---------------------------------------------------CARD */
+.card {
+    border-radius: 8px;
+    width: 90%;
+    position: relative;
+    border: 0;
+    margin: 20px 20px 40px 20px;
+    height: 290px;
+    background-color: var(--cl-form);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+}
+
+.row.card-content {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-float-btn {
+    position: absolute;
+    display: flex;
+    right: 12px;
+    top: -14px;
+}
+
+.card-float-btn .ol.po-star {
+    display: flex;
+}
+
+.card-float-btn .card-point {
+    position: initial;
+    margin-right: 5px;
+}
+
+.card-point {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--cl-secundary);
+    padding: 4px 15px;
+    right: 12px;
+    top: -14px;
+}
+
+.myb-4{
+    width: 150px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    transition: .3s ease-out;
+}
+
+.myb-4 a{
+    color: #000;
+    text-decoration: none;
+}
+
+.myd-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: none;
+    height: 355px;
+    width: 100%;
+}
+
+
+
+
+/* BOTONES DE EDICIÓN DE UN CARD */
+.my-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.my-4 a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    height: 24px;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding: 4px 10px;
+}
+
+.my-4 a:first-child {
+    background: var(--cl-secundary);
+    color: white;
+}
+
+.my-4 a:last-child {
+    background: var(--cl-primary);
+    color: white;
+}
+
+.my-4 a:first-child:hover {
+    background: var(--cl-secundary-dark);
+    color: white;
+}
+
+.my-4 a:last-child:hover {
+    background: var(--cl-error);
+    color: white;
+}
+
+.po-digit {
+    margin-bottom: 0;
+}
+
+/*
+.po-star .bxs-star {
+    color: var(--cl-primary);
+}
+
+.po-star i:hover {
+    color: var(--cl-form);
+}
+*/
+
+.card-content,
+.card-content > div,
+.cont-img {
+    height: 100%;
+}
+
+
+.cont-img {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cl-secundary);
+    color: var(--cl-primary);
+}
+
+.cont-img i {
+    font-size: 20rem;
+}
+
+.cont-img img {
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 0;
+}
+
+.card-content .nine.columns {
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cont-text .cont-title h5 {
+    font-weight: bold;
+}
+
+.num-files {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    color: var(--cl-form);
+    background-color: var(--cl-secundary);
+    padding: 0 5px;
+    width: fit-content;
+    user-select: none;
+}
+
+    /* .num-files:hover{
+        background-color: var(--cl-primary);
+    } */
+
+.num-files p {
+    margin-bottom: 0;
+}
+
+.inf-mess {
+    display: flex;
+    align-items: center;
+}
+
+.inf-mess i {
+    color: var(--cl-secundary);
+    font-weight: 500;
+    transition: .3s ease;
+}
+
+.inf-mess > :first-child,
+.num-files i {
+    margin-right: 5px;
+}
+
+.inf-mess:hover i {
+    color: var(--cl-secundary-dark);
+}
+
+
+.cont-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cont-button > i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.cont-button .perfil {
+    width: 27px;
+    height: 27px;
+}
+
+.cont-button img {
+    cursor: auto;
+}
+
+.cont-button img:hover {
+    transform: scale(1);
+}
+
+.cont-a {
+    padding: 3px 30px;
+    border-radius: 4px;
+    color: var(--cl-error-dark);
+    background: var(--cl-form);
+    border: 1px solid var(--cl-error-dark);
+    text-decoration: none;
+}
+
+.cont-a:hover {
+    color: var(--cl-form);
+    background: var(--cl-error-dark);
+}
+
+.cont-btn {
+    margin-bottom: 0;
+    background-color: var(--cl-bgcolor);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+    transition: .3s ease-out;
+}
+
+.cont-btn:hover {
+    background-color: var(--cl-primary);
+    color: var(--cl-form);
+}
+
+.myb-4 a:hover {
+    background-color: var(--cl-primary);
+    color: var(--cl-form);
+}
+
+.cont-btn:active {
+    background-color: var(--cl-bgcolor);
+    color: var(--cl-primary);
+}
+
+/* Mobile first queries */
+
+/* Larger than mobile */
+@media screen and (min-width: 400px) and (max-width:549px) {
+
+    .card {
+        height: auto;
+    }
+
+    .cont-img {
+        border-radius: 0;
+    }
+
+    .card-content > .three.columns {
+        width: 100%;
+    }
+    
+    .card-content > .nine.columns {
+        width: 100%;
+    }
+
+
+
+    .container .three.columns .filter {
+        height: auto;
+    }
+
+
+    .cont-button .perfil {
+        display: block;
+    }
+
+}
+
+/* Larger than phablet */
+@media screen and (min-width: 550px) and (max-width:749px) {
+    
+    .card-content > .three.columns {
+        width: 38%;
+    }
+    
+    .card-content > .nine.columns {
+        width: 58%;
+        overflow-y: scroll;
+    }
+
+
+    
+}
+
+/* Larger than tablet */
+@media screen and (min-width: 750px) and (max-width:999px) {
+    
+}
+
+/* Larger than desktop */
+@media screen and (min-width: 1000px) and (max-width:1199px) {
+    
+    .card-content > .three.columns {
+        width: 22%;
+    }
+}
+
+/* Larger than Desktop HD */
+@media screen and (min-width: 1200px) {
+
+}

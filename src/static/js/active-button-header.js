@@ -1,5 +1,5 @@
 const currentURL = window.location.href,
-home = "home", mPro = "mis-proyectos";
+home = "List_Proyectos", mPro = "misProyectos";
 
 const bt_proy = document.getElementById('bt-pro'),
     bt_mproy = document.getElementById('bt-mpro');

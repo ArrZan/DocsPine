@@ -1,5 +1,5 @@
 import os
-from flask import render_template, request, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_wtf.csrf import CSRFProtect
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
@@ -12,6 +12,10 @@ from apps.user.Models import ModelUser
 from apps.user.entities.User import User
 
 from apps.user.utils import generateRandomName
+
+from Lenguage import Lenguajes
+lenguajes=Lenguajes()
+
 # --------------------------------------------------------------------------------------------------------------- Login
 class LoginView(MethodView):
     def __init__(self, db):
@@ -19,15 +23,30 @@ class LoginView(MethodView):
     
     def get(self):
         if current_user.is_authenticated:
-            return redirect(url_for('home'))
-        return render_template('auth/login.html')
+            return redirect(url_for('all_Proyectos'))
+        idioma=[]
+        if current_user.is_authenticated:
+            if current_user.idioma == 1:
+                idioma = lenguajes.Español()
+            elif current_user.idioma == 2:
+                idioma = lenguajes.Ingles()
+            elif current_user.idioma == 3:
+                idioma = lenguajes.Frances()
+            elif current_user.idioma == 4:
+                idioma = lenguajes.Italiano()
+            elif current_user.idioma == 5:
+                idioma = lenguajes.Portugues()
+        else:
+    
+            idioma = lenguajes.Español()  # idioma por defecto para usuarios no autenticados
+
+        return render_template('auth/login.html', idioma=idioma)
     
     def post(self):
         #Primero preguntamos si el usuario ya se ha autenticado
         if current_user.is_authenticated:
             # Si ya está, se lo devuelve al home
-            return redirect(url_for('home'))
-        
+            return redirect(url_for('all_Proyectos'))
         # Creamos el objeto usuario con los datos enviados del POST
         user = User(0, request.form['username'], request.form['password'])
 
@@ -40,17 +59,14 @@ class LoginView(MethodView):
                 # Almacenamos el usuario logeado
                 login_user(logged_user)
                 # Lo redireccionamos a home ya que se ha logeado
-                return redirect(url_for('home'))
+                return redirect(url_for('all_Proyectos'))
             else:
-                print("La clave no es la correcta")
                 flash("La clave no es la correcta.")
                 return render_template('auth/login.html')
         else:
-            print("Usuario no encontrado")
             flash('Usuario no encontrado.')
             return render_template('auth/login.html')
         
-        return render_template('auth/login.html')
 
 
 # ------------------------------------------------------------------------------------------------------- Ruta Register
@@ -61,7 +77,7 @@ class RegisterView(MethodView):
     
     def get(self):
         if current_user.is_authenticated:
-            return redirect(url_for('home'))
+            return redirect(url_for('all_Proyectos'))
         return render_template('auth/login.html')
     
     def post(self):
@@ -101,7 +117,7 @@ class RegisterView(MethodView):
                 # Lo logeamos con un force True porque debemos forzarlo
                 login_user(user=logged_user, force=True)
                 data = {'message': '¡Te haz registrado exitosamente!\nTe redirigiremos a la página principal!',
-                        'redirectUrl': 'home'}
+                        'redirectUrl': 'List_Proyectos'}
                 
                 # Lo redireccionamos a home ya que se ha registrado y lo queremos logear directamente
                 return jsonify(data)

@@ -1,0 +1,14 @@
+:root {
+    --cl-primary-dark: #0E1418;
+    --cl-primary: #182329;
+    --cl-secundary-dark: #2B7A77;
+    --cl-secundary: #3AAEAB;
+    --cl-bgcolor-dark: #B5E1DF;
+    --cl-bgcolor: #DDF1F0;
+    --cl-form: #FFFFFF;
+    --cl-contour: #C4C0C0;
+    --cl-error-dark: #B40009;
+    --cl-error: #ff7474;
+    --cl-exito: #429749;
+    --cl-exito-dark: #1A441E;
+}   

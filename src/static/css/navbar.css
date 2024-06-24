@@ -1,28 +1,14 @@
-:root {
-    --cl-primary-dark: #0E1418;
-    --cl-primary: #182329;
-    --cl-secundary-dark: #2B7A77;
-    --cl-secundary: #3AAEAB;
-    --cl-bgcolor-dark: #B5E1DF;
-    --cl-bgcolor: #DDF1F0;
-    --cl-form: #FFFFFF;
-    --cl-contour: #C4C0C0;
-    --cl-error-dark: #B40009;
-    --cl-error: #ff7474;
-    --cl-exito: #429749;
-    --cl-exito-dark: #1A441E;
-}   
-
 body {
     background-color: var(--cl-bgcolor);
     min-height: 100vh;
 }
 
 .header {
+    z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: sticky;
     box-sizing: border-box;
     top: 0;
     left: 0;
@@ -55,13 +41,68 @@ body {
     text-decoration: none;
 }
 
-.logo img {
+/*Select lenguage*/
+#langselect {
+    background-color: var(--cl-primary-dark);
+    color: #fff ;
+    width: 70px; /* Ajusta el ancho según sea necesario para las iniciales */
+    text-align: center;
+}
+
+.containerl {
+    display: flex;
+    place-items: right;
+    margin-top: 14px;
+}
+.lenguajeS {
+    margin-top: 0;
+    display: inline-block;
+    position: relative;
+}
+
+
+#langselect:hover {
+    cursor: pointer;
+}
+
+#langselect::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#langselect option {
+    text-align: left;
+}
+/* */
+#logoNav {
+    display: flex;
+    color: var(--cl-form);
+    align-items: center;
+    user-select: none;
+}
+
+#logoNav p {
+    font-size: 18px;
+    color: var(--cl-bgcolor);
+    margin-bottom: 0;
+    font-weight: bold;
+    letter-spacing: 5px;
+    user-select: none;
+    margin-top: 14px;
+}
+
+#logoNav img {
     height: 40px;
     width: auto;
     padding: 5px;
+    margin-top: 7px;
 }
 
-.navbar a {
+.navbar > a {
     position: relative;
     color: var(--cl-form);
     font-size: 1em;
@@ -120,10 +161,6 @@ body {
     margin: 0 0 7px 0;
 }
 
-.item-idioma {
-    position: relative;
-    cursor: default;
-}
 
 .wrapper-items .item {
     cursor: pointer;
@@ -140,83 +177,6 @@ body {
 
 .wrapper-items .item:hover {
     background-color: var(--cl-bgcolor-dark);
-}
-
-.header .control-idioma {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.item-idioma ul {
-    left: 0;
-    width: 100%;
-}
-
-.item.item-idioma:hover {
-    cursor: pointer;
-    background-color: var(--cl-bgcolor);
-}
-
-#idioma {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 7px;
-    text-transform: capitalize;
-    font-weight: normal;
-    background-color: var(--cl-form);
-    margin-bottom: 0;
-    border: 0;
-}
-
-#idioma:hover {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-   
-}
-
-#idioma span {
-    margin-left: 3px;
-}
-
-#idioma i {
-    transition: all .3s;
-}
-
-.ul-idiomas {
-    padding-left: 0;
-    list-style: none;
-    cursor: default;
-    position: absolute;
-    z-index: 7;
-    width: 150px;
-    top: 52px;
-    left: -108px;
-    background-color: var(--cl-form);
-    border-radius: 4px;
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
-}
-
-#idiomas li {
-    margin-bottom: 0;
-    padding: 4px 7px;
-}
-
-#idiomas li a{
-    color: var(--cl-primary);
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-#idiomas li:hover {
-    background-color: var(--cl-bgcolor-dark);
-}
-
-#idioma.rotated i {
-    transform: rotate(180deg);
 }
 
 #logout {

@@ -1,18 +1,17 @@
 
 .container {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-bottom: 50px;
     border: 1px solid var(--cl-contour);
     width: 34%;
     padding: 0;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+    background-color: var(--cl-form);
     transition: .4s ease-in-out;
-
 }
 
-.container,
+#form-container,
 .submit,
 .twelve.twelve.columns input {
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
@@ -21,7 +20,7 @@
 #logo {
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    padding: 20px 0;
     border-bottom: 1px solid var(--cl-contour);
     margin-bottom: 5px;
 }
@@ -55,9 +54,10 @@
 }
 
 #header-form .header-active {
-    background-color: var(--cl-bgcolor);
+    background-color: var(--cl-form);
     border-bottom: 0;
 }
+
 
 #header-form .header-active h6 {
     font-weight: bold;
@@ -151,7 +151,7 @@
 }
 
 #body-form {
-    padding: 0 25px 25px 25px;
+    padding: 0 25px 20px 25px;
 }
 
 #body-login.active,

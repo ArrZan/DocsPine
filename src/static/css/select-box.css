@@ -1,0 +1,60 @@
+.select-box {
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    user-select: none;
+}
+
+.select-btn {
+    border-radius: 4px;
+    background-color: var(--cl-form);
+    border: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 0 7px;
+    text-transform: capitalize;
+    font-weight: normal;
+}
+
+.select-btn span {
+    font-size: 1.3em;
+}
+
+.options {
+    position: absolute;
+    top: 110%;
+    list-style: none;
+    cursor: default;
+    overflow: hidden;
+    z-index: 7;
+    width: 100%;
+    background-color: var(--cl-form);
+    border-radius: 4px;
+    display: none;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+    /* user-select: none; */
+}
+
+.options li {
+    margin-bottom: 0;
+}
+
+.options li:hover {
+    background-color: var(--cl-bgcolor-dark);
+}
+
+
+.options li a {
+    color: var(--cl-primary);
+    display: block;
+    height: 100%;
+    padding: 4px 7px;
+    text-decoration: none;
+}
+
+.select-btn.rotated i {
+    transform: rotate(180deg);
+}

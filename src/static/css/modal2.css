@@ -1,0 +1,396 @@
+
+#cont-files {
+    display: flex;
+}
+
+.modal_descripcion a.btn.btn-primary {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 10px;
+
+}
+
+/* Estilo para filas flexibles */
+.form-control {
+    width: 100%;
+}
+
+.modal-custom .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal_apartado_coment {
+    padding: 10px 0;
+}
+
+.modal_apartado_coment > .row {
+    margin: 20px;
+}
+/* Estilo para columnas flexibles */
+.modal-custom .col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+/* Estilo para columnas flexibles de ancho fijo */
+.modal-custom .col-1 {
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+}
+
+/* .col-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+} */
+
+.col-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* Estilo para botones */
+.button {
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: aqua;
+    transition: background-color .5s;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: black;
+}
+
+/* Estilo para modales */
+.modal {
+    z-index: 1051;
+    position: fixed;
+    padding: 2em 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(17, 17, 16, 0.4);
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo del scroll para la sección de comentarios */
+.modal::-webkit-scrollbar {
+    width: 1px;
+    /* Tamaño de la barra de desplazamiento */
+}
+
+.modal::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color de fondo de la pista de desplazamiento */
+    border-radius: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color del pulgar de la barra de desplazamiento al pasar el ratón */
+}
+
+.modal_container {
+    z-index: 1051;
+    margin: auto;
+    width: 800px;
+    background-color: #DDF1F1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 40px 0;
+    position: relative;
+    gap: 1em;
+}
+
+
+.modal_cerrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #2B7A77;
+    height: auto;
+    width: auto;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid;
+    transition: background-color .5s;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.modal_cerrar:hover {
+    background-color: #2B7A77;
+    color: #fff;
+}
+
+.modal_show {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity .6s;
+}
+
+/* Estilos para el contenido modal */
+.modal_apartado_info {
+    border-radius: 10px;
+    width: 90%;
+    background-color: #fff;
+}
+
+.info_project {
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_conten_foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-custom .modal_descripcion {
+    margin: 2em;
+}
+
+.modal_foto {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.modal-custom .modal_apartado_coment {
+    width: 90%;
+    overflow-y: auto;
+    min-height: 0px;
+    max-height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+/* Estilo del scroll para la sección de comentarios */
+.modal_apartado_coment::-webkit-scrollbar {
+    width: 5px;
+    /* Tamaño de la barra de desplazamiento */
+}
+
+.modal_apartado_coment::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color de fondo de la pista de desplazamiento */
+    border-radius: 10px;
+}
+
+.modal_apartado_coment::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
+.modal_apartado_coment::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color del pulgar de la barra de desplazamiento al pasar el ratón */
+}
+
+.modal_coment {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    background-color: var(--cl-bgcolor);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 20px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+}
+
+.modal-custom .modal_coment .col {
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+/* Estilos para comentarios */
+.modal-custom .col-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 6px solid var(--cl-bgcolor);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+
+}
+
+.modal-custom .foto_comentario {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+}
+
+.foto_comentario {
+    width: 50px;
+}
+
+.agregar_comentario {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    /* Ensure that the children are aligned horizontally */
+    justify-content: space-between;
+    /* Space out the textarea and button */
+}
+
+.redactar_comentario {
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    min-height: 30px;
+    color: #000;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+.enviar_comentario {
+    margin: 1px;
+    border: 1px solid;
+    background-color: #2B7A77;
+    border-radius: 10px;
+    transition: background-color .7s;
+    max-height: 40px;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.modal-custom .enviar_comentario:hover {
+    color: #2B7A77;
+    background-color: #fff;
+}
+
+
+/* Estilos para las estrellas de puntuación */
+.modal-custom input[type="radio"] {
+    display: none;
+}
+
+.modal-custom label {
+    display: contents;
+    color: grey;
+    font-size: 25PX;
+}
+
+.h6modal {
+    font-family: 70px;
+}
+
+.modal-custom .clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+.modal-custom label:hover,
+.modal-custom label:hover~label {
+    color: #2B7A77;
+}
+
+.modal-custom input[type="radio"]:checked~label {
+    color: #2B7A77;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 800px) {
+    .modal_container {
+        max-width: 80%;
+        padding: 2em;
+    }
+
+    .modal_descripcion {
+        margin: 1em;
+    }
+
+    .modal_foto {
+        margin: auto;
+        height: 100%;
+    }
+
+    .modal_coment {
+        max-width: 90%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .agregar_comentario {
+        display: block;
+        
+    }
+
+    .redactar_comentario {
+        max-width: 100%;
+        min-width: 100%;
+        margin: 0;
+    }
+
+    .enviar_comentario {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+    }
+
+    .enviar_comentario {
+        margin-top: 1em;
+        padding: 1em;
+    }
+}

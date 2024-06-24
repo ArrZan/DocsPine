@@ -15,11 +15,11 @@
     <div class="row" id="header-form">
         <input type="text" name="" id="" style="display: none;">
         <div class="seven columns header-active">
-            <h6 class="btn-login">Iniciar sesión</h6>
+            <h6 class="btn-login login">Iniciar sesión</h6>
         </div>
         
         <div class="five columns">
-            <h6 class="btn-register">Registrate</h6>
+            <h6 class="btn-register register">Registrate</h6>
         </div>
     </div>
     
@@ -28,7 +28,7 @@
     <div class="row active" id="body-form">
 
         <div class="row" id="logo">
-            <img src="{{ url_for('static', filename='images/logo/logo-example.png') }}" alt="Logo empresa">
+            <img src="{{ url_for('static', filename='svg/logo pagina/logo.svg') }}" alt="Logo empresa">
         </div>
                 
         <!-- Body del login
@@ -60,13 +60,13 @@
             <div class="row">
                 
                 <div class="twelve columns">
-                    <h5>¡Inicia sesión ya!</h5>
+                    <h5 class="log1">¡Inicia sesión ya!</h5> 
                 </div>
                 
                 <div class="twelve columns">
                     <div class="row control-form">
                         <label for="usernameImput"><i class='bx bxs-user'></i></label>
-                        <input class="u-full-width" type="text" name="username" placeholder="Usuario" id="usernameImput" maxlength="15" minlength="3" required autofocus>
+                        <input class="u-full-width log3" type="text" name="username" placeholder="Usuario" id="usernameImput" maxlength="15" minlength="3" required autofocus>
                     </div>
 
                     <div class="row control-form">
@@ -77,7 +77,7 @@
                 
             </div>
 
-            <button type="submit" class="btn-submit">Ingresar</button>
+            <button type="submit" class="btn-submit log2">Ingresar</button>
         </form>
         
 
@@ -102,7 +102,7 @@
             <div class="row">
 
                 <div class="twelve columns">
-                    <h5>¡Regístrate ahora!</h5>
+                    <h5 class="reg0">¡Regístrate ahora!</h5>
                 </div>
     
                 <div class="twelve columns">
@@ -173,7 +173,7 @@
                                     <i class='bx bxs-image-add'></i>
                                 </div>
                                 <div class="ten columns">
-                                    <strong>Selecciona una imagen</strong>
+                                    <strong class="imgs">Selecciona una imagen</strong>
                                     <p></p>
                                 </div>
                                 
@@ -182,9 +182,10 @@
                             </label>
                             <div class="messages-form">
                                 <ul>
-                                    <li class="message-form">Dato no obligatorio.</li>
-                                    <li class="message-form">Tamaño máximo de 2MB.</li>
-                                    <li class="message-form">Tipo de imagen permitido JPEG, JPG, PNG.</li>
+                                    <li class="message-form" id="message1">Dato no obligatorio.</li>
+                                    <li class="message-form" id="message2">Recomendamos que sea cuadrada la foto (ej: 256x256px).</li>
+                                    <li class="message-form" id="message2">Tamaño máximo de 2MB.</li>
+                                    <li class="message-form" id="message3">Tipo de imagen permitido JPEG, JPG, PNG.</li>
                                 </ul>
                             </div>
                         </div>
@@ -193,23 +194,8 @@
                 
             </div>
             
-            <button type="submit" class="btn-submit">Registrarse</button>
+            <button type="submit" class="btn-submit reg1">Registrarse</button>
         </form>
-    </div>
-</div>
-
-<div class="modal-back">
-    <div class="modal-response">
-        <div class="modal-header">
-            <p>Esto es el título</p>
-            <i class='bx bx-x'></i>
-        </div>
-        <div class="modal-body">
-            <div class="icon"><i class=''></i></div>
-            <p class="text">Esto es el párrafo</p>
-        </div>
-        <div class="modal-footer">
-        </div>
     </div>
 </div>
 
@@ -218,4 +204,5 @@
 {% block JS %}   
 <script type="text/javascript" src="{{ url_for('static', filename='js/active-buttons-login.js' ) }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/register-fetch.js' ) }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/login-lenguaje.js' ) }}"></script>
 {% endblock %}

@@ -1,0 +1,248 @@
+{% extends "proyectos/base-proyecto.html" %}
+
+{% block title %}DocsPine{% endblock %}
+
+{% block customCSS2 %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/docs_style.css') }}">
+{% endblock %}
+
+{% block filters %}
+    <div class="myd-4">
+        <div class="row filter">
+
+            <div class="filter-type">
+                <div class="select-cont">
+                    <form method="GET" action="{{ url_for('mis_Proyectos') }}">
+                        <label for="order_by">{{idioma.Ordenar_por}}:</label>
+                        <select name="order_by" id="order_by" onchange="this.form.submit()">
+                            <!-- <option value="random" {% if request.args.get('order_by') == 'random' %}selected{% endif %}>Aleatorio</option> -->
+                            <option value="rating_desc" {% if request.args.get('order_by') == 'rating_desc' %}selected{% endif %}>{{idioma.Mejor_Calificado}}</option>
+                            <option value="rating_asc" {% if request.args.get('order_by') == 'rating_asc' %}selected{% endif %}>{{idioma.Peor_Calificado}}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CAMBIOOOOOO-->
+        <button class="cont-btn" id="crear-proyecto" data-bs-toggle="creaar-proyecto>">
+            {{idioma.Crear_Proyecto}}
+        </button>
+    </div>
+
+{% endblock %}
+
+{% block lista %}
+{% for proyecto in proyectos %}
+    <div class="row card">
+
+        <div class="col">
+            <div class="card-float-btn">
+                {% if proyecto.PromedioCalificacion > 0 %}
+                    <div class="card-point">
+                        <div class="ol po-star">
+                            {% for i in range(1, 6) %}
+                            {% if i <= proyecto.PromedioCalificacion %}
+                                <i class='bx bxs-star'></i>
+                            {% else %}
+                                <i class='bx bx-star'></i>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <p class="po-digit">/{{ proyecto.PromedioCalificacion | round(1) }}</p>
+                    </div>
+                    {% else %}
+                    <div class="card-point">
+                        <div class="ol po-star">
+                            {% for i in range(1, 6) %}
+                                <i class='bx bx-star'></i> 
+                            {% endfor %}
+                        </div>
+                        <p class="po-digit">/0.0</p>
+                    </div>
+                {% endif %}
+
+                <div class="my-4">
+                    <a href="{{ url_for('editar_proyecto', ID=proyecto['ID']) }}" 
+                    class="btn btn-primary" title="{{idioma.Editar_}}">
+                    <i class='bx bxs-edit'></i></a>
+                    <a href="{{ url_for('delete', ID=proyecto.ID) }}" 
+                    class="btn btn-danger delete-project" title="{{idioma.Eliminar_}}"
+                    data-project="{{ proyecto.NombreProyecto }}">
+                        <i class='bx bxs-trash-alt' ></i>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        <!-- ###############################################################   -->
+
+        <div class="row card-content">
+            <div class="three columns">
+                <div class="cont-img">
+                    {% if proyecto.Imagen %}
+                    <img class="modal_foto" id="imagen{{ proyecto.ID }}" src="data:image/jpeg;base64,{{ proyecto.Imagen }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% else %}
+                    <img style="width: 100%; height: auto;" id="imagen{{ proyecto.ID }}" class="modal_foto" src="{{ url_for('static', filename='images/default/nonimage.svg') }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="nine columns">
+                <div class="cont-text">
+                    <div class="cont-title">
+                        <h5 id="nombre{{ proyecto.ID }}">{{ proyecto.NombreProyecto}}</h5>
+                    </div>
+                    <div class="cont-desc">
+                        <p id="desc{{ proyecto.ID }}" style="margin-bottom: 0;">{{ proyecto.DescripcionProyecto | truncate(300, True, '...') }}</p>
+                    </div>
+                </div>
+                <div class="cont-button">
+                    <i>
+                        <div class="perfil">
+                            <img src="{{ proyecto.Foto }} " alt="Foto perfil">
+                        </div>
+                        <strong>{{ idioma.Autor }}: </strong>
+                        <p id="autor{{ proyecto.ID }}" style="margin-bottom: 0;">{{ proyecto.NombreUsuario }}</p>
+                    </i>
+                    
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="cont-btn" id="abrir_modal" data-bs-toggle="modal"
+                        data-bs-target="#modalProyectos" data-action="/publication/{{ proyecto.ID }}"
+                        data-project-id="{{ proyecto.ID }}" data-fecha="{{ proyecto.Fecha }}"
+                        data-user-id="{{ current_user.id }}">
+                        {{ idioma.Visualizar }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
+
+
+
+
+
+{% block modals %}
+    <!-- modal  -->
+
+    <section class="modal modal-custom" id="modalProyectos" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal_container shadow-lg">
+
+            
+            <!-- apartado de la infomación -->
+            <div class="modal_apartado_info">
+                <div class="modal_content row"><!-- CAMBIOOOOOO-->
+
+
+                    <div class="modal_conten_foto col">
+                        <img class="modal_foto" id="modalFoto" src="" alt="imagen">
+                    </div>
+
+                    <div class="col info_project">
+                        <!-- CAMBIOOOOOO-->
+                        <div>
+                            <h5 class="modalTitle" style="font-weight: bold;"></h5>
+                            <h6 style="display: flex;">
+                                <b>{{ idioma.Autor }}: </b><p class="modalAutor" style="margin-bottom: 0; margin-left: 5px;"></p>
+                            </h6>
+                            <h6 style="display: flex;">
+                                <b>{{ idioma.Fecha_creación }}: </b><p class="modalFecha" style="margin-bottom: 0; margin-left: 5px;"></p>
+                            </h6>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal_descripcion">
+                    <div class="row">
+                        <div class="col">
+                            <h4>{{ idioma.Puntuación }}:</h4>
+                        </div>
+                        <div class="col">
+
+                            <form id="calificacion" action=""
+                                method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <p class="clasificacion">
+                                    <input class="input1" id="radio1" type="radio" value="5">
+                                    <label class="label1" for="radio1">★</label>
+
+                                    <input class="input1" id="radio2" type="radio" value="4">
+                                    <label class="label1" for="radio2">★</label>
+
+                                    <input class="input1" id="radio3" type="radio" value="3">
+                                    <label class="label1" for="radio3">★</label>
+
+                                    <input class="input1" id="radio4" type="radio" value="2">
+                                    <label class="label1" for="radio4">★</label>
+
+                                    <input class="input1" id="radio5" type="radio" value="1">
+                                    <label class="label1" for="radio5">★</label>
+                                </p>
+                                <input type="hidden" id="calificar_proyecto" name="calificar_proyecto">
+                            </form>
+                            
+                        </div>
+                    </div>
+
+                    <b>{{ idioma.Descripción }}:</b>
+
+                    <p class="modalDesc" id="DescripcionProyect"></p>
+
+                    <b style="margin-bottom: 2rem;">{{ idioma.Archivos }}</b>
+
+                    <div id="cont-files">
+                        
+                        <div id="filewrapper">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- apartado de comentarios -->
+            <div class="modal_apartado_coment">
+                
+            </div>
+
+
+            <!-- CAMBIOOOOOO-->
+            <form class="agregar_comentario" action=""
+            data-project-id="" data-user-id="{{ current_user.id }}" method="post">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <textarea class="redactar_comentario" name="redactar_comentario" cols="40" rows="2"
+                    placeholder="{{ idioma.Escribe_comentario }}"></textarea>
+                <button type="submit" class="enviar_comentario">{{ idioma.Comentar }}</button>
+
+            </form>
+
+
+            <a href="#" class="modal_cerrar">{{ idioma.Cerrar }}</a>
+
+
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+{% block JS %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/coment_fetch.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    var sessionTime = "{{ sessionTime }}";
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/sesion_logout_time.js') }}"></script>
+{% endblock %}

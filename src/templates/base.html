@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
     <!-- Configuraciones básicas
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Description  se muestra a menudo en los resultados de los motores de búsqueda como resumen de la pagina web -->    
+    <!-- Description  se muestra a menudo en los resultados de los motores de búsqueda como resumen de la pagina web -->
     <meta name="description" content="Gestión de proyectos, con sistema de puntuación y comentarios.">
     <meta name="author" content="Grupo Flask">
 
@@ -27,15 +28,18 @@
 
     <!-- Icono de la pagina
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='svg/logo pagina/logo.svg')}}">
 
     <!-- CSS propio y personalizado
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
-    {% block customCSS %}   
+
+    {% block customCSS %}
     {% endblock %}
 
     <!-- JS propio y personalizado
@@ -46,101 +50,121 @@
 <body>
 
     {% block header %}
-        <header class="header">
-            
+    <header class="header">
 
-            <!-- Acá preguntar si que está autenticado, ponerle el justify content space around-->
-            <div class="row">
-                <div class="five columns">
-                    <div class="logo">
-                        <img src="{{ url_for('static', filename='images/logo/logo-exampleWhite.png')}}" alt="Logo de Empresa">
-                    </div>
+        <!-- Acá preguntar si que está autenticado, ponerle el justify content space around-->
+        <div class="row">
+            <div class="five columns">
+                <div class="logo" id="logoNav">
+                    <img src="{{ url_for('static', filename='svg/logo pagina/logo.svg')}}" alt="Logo de Empresa">
+                    <p>DOCSPINE</p>
                 </div>
-                
-                {% if current_user.is_authenticated %}
-                <div class="seven columns">
-
-                    <input type="checkbox" id="check-menu">
-                    <label for="check-menu" class="menu">
-                        <i class='bx bx-menu' id="menu-open"></i>
-                        <i class='bx bx-x' id="menu-close"></i>
-                    </label>
-        
-                    <nav class="navbar">
-                        <a href="{{ url_for('home' ) }}" id="bt-pro" style="--i:0">Proyectos</a>
-                        <a href="{{ url_for('misProyectos' ) }}" id="bt-mpro" style="--i:1">Mis proyectos</a>
-                        <a href="{{ url_for('logout') }}" class="close" style="--i:2"><i class='bx bx-log-in' ></i>Cerrar sesión</a>
-                        
-                    </nav>
-                    
-                    <div class="perfil">
-                        <img id="perfil" src="{{ url_for('static', filename=current_user.get_image() )}}" alt="Perfil de usuario">
-                    </div>
-        
-                    <div class="wrapper">
-                        <div class="w-header">
-                            <span>¡Bienvenido, <strong>{{ current_user.fullname }}</strong>!</span>
-                        </div>
-                        <div class="w-content">
-
-                            <div class="wrapper-items">
-
-                                <div class="item"><a href="{{ url_for('home' ) }}">Página principal</a></div>
-                                <div class="item"><a href="{{ url_for('misProyectos' ) }}">Mis proyectos</a></div>
-                                    
-                                <div class="item item-idioma">
-                                    <button class="bt-idioma" id="idioma">
-                                        <span class="bt-idioma">Español</span>
-                                        <i class='bx bx-caret-down bt-idioma'></i>
-                                    </button>
-                                    <ul class="ul-idiomas" id="idiomas" style="display: none;">
-                                        <li class="opcion"><a href="">Español</a></li>
-                                        <li class="opcion"><a href="">Inglés</a></li>
-                                        <li class="opcion"><a href="">Francés</a></li>
-                                        <li class="opcion"><a href="">Italiano</a></li>
-                                        <li class="opcion"><a href="">Portugués</a></li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            
-                            <a href="{{ url_for('logout') }}" id="logout">Cerrar sesión</a>
-
-                        </div>
-                    </div>
-        
-                </div>
-                {% else %}
-                    <div class="control-idioma">
-                        <button class="bt-idioma" id="idioma">
-                            <span class="bt-idioma">es</span>
-                            <i class='bx bx-caret-down bt-idioma'></i>
-                        </button>
-                        <ul class="ul-idiomas" id="idiomas" style="display: none;">
-                            <li class="opcion"><a href="">Español</a></li>
-                            <li class="opcion"><a href="">Inglés</a></li>
-                            <li class="opcion"><a href="">Francés</a></li>
-                            <li class="opcion"><a href="">Italiano</a></li>
-                            <li class="opcion"><a href="">Portugués</a></li>
-                        </ul>
-                    </div>
-                {% endif %}
-
-                
-
             </div>
 
-        </header>
+            {% if current_user.is_authenticated %}
+            <div class="seven columns">
+
+                <input type="checkbox" id="check-menu">
+                <label for="check-menu" class="menu">
+                    <i class='bx bx-menu' id="menu-open"></i>
+                    <i class='bx bx-x' id="menu-close"></i>
+                </label>
+
+                <nav class="navbar">
+                    <a href="{{ url_for('all_Proyectos' ) }}" id="bt-pro" style="--i:0">{{idioma.Proyectos }}</a>
+                    <a href="{{ url_for('mis_Proyectos' ) }}" id="bt-mpro" style="--i:1">{{idioma.Mis_proyectos }}</a>
+                    <a href="{{ url_for('logout') }}" class="close" style="--i:2"><i class='bx bx-log-in'></i>Cerrar
+                        sesión</a>
+
+                </nav>
+
+                <div class="perfil">
+                    <img id="perfil" src="{{ url_for('static', filename=current_user.get_image() )}}"
+                        alt="Perfil de usuario">
+                </div>
+
+                <div class="wrapper">
+                    <div class="w-header">
+                        <span>¡{{idioma.Bienvenido }}, <strong>{{ current_user.fullname }}</strong>!</span>
+                    </div>
+                    <div class="w-content">
+
+                        <div class="wrapper-items">
+
+                            <div class="item"><a href="{{ url_for('all_Proyectos' ) }}">{{idioma.Página_principal }}</a></div>
+                            <div class="item"><a href="{{ url_for('mis_Proyectos' ) }}">{{idioma.Mis_proyectos }}</a></div>
+
+                            <div class="item item-idioma">
+                                <form action="/idioma" method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <select class="form-control" name="idioma" onchange="this.form.submit()">
+
+                                        {% if current_user.is_authenticated %}
+                                        <option id="id_seleccionado" disabled selected value="español">{{ idioma.Idioma_Selec }}</option>
+                                        <option value="1" {% if idioma.idioma_actual == 'Español' %} selected {% endif %}>Español</option>
+                                        <option value="2" {% if idioma.idioma_actual == 'Ingles' %} selected {% endif %}>Inglés</option>
+                                        <option value="3" {% if idioma.idioma_actual == 'Frances' %} selected {% endif %}>Francés</option>
+                                        <option value="4" {% if idioma.idioma_actual == 'Italiano' %} selected {% endif %}>Italiano</option>
+                                        <option value="5" {% if idioma.idioma_actual == 'Portugués' %} selected {% endif %}>Portugués</option>
+                                        {% else %}
+                                        <option id="id_seleccionado" disabled selected value="español">{{ idioma.Idioma_Selec }}</option>
+                                        <option value="1">Español</option>
+                                        <option value="2">Inglés</option>
+                                        <option value="3">Francés</option>
+                                        <option value="4">Italiano</option>
+                                        <option value="5">Portugués</option>
+                                        {% endif %}
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+
+                        <a href="{{ url_for('logout') }}" id="logout">{{idioma.Cerrar_sesión }}</a>
+
+                    </div>
+                </div>
+
+            </div>
+            {% else %}
+            <div class="containerl">
+                <div class="lenguajeS">
+                    <select id="langselect" onchange=updateSelectedLanguage() onfocus=showFullNames()> 
+                        <option value="español" data-fullname="Español">ES</option>
+                        <option value="english" data-fullname="English">EN</option>
+                        <option value="frances" data-fullname="Francés">FR</option>
+                        <option value="italiano" data-fullname="Italiano">IT</option>
+                        <option value="portugues" data-fullname="Portugués">PO</option>
+                    </select>
+                </div>
+            </div>
+            {% endif %} 
+        </div>
+    </header>
 
     {% endblock %}
-
-
 
     <!-- Bloque del body
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     {% block body %}
-    
+
     {% endblock %}
+
+    <!-- Modal
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="modal-back">
+        <div class="modal-response">
+            <div class="modal-header">
+                <p>Esto es el título</p>
+                <i class='bx bx-x'></i>
+            </div>
+            <div class="modal-body">
+                <div class="icon"><i class=''></i></div>
+                <p class="text">Esto es el párrafo</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 
     {% block footer %}
     <footer>
@@ -148,7 +172,7 @@
         <div class="container-footer">
             <div class="row u-full-width">
                 <div class="six columns">
-                    <h3>Nuestro sitio web</h3>
+                    <h3 class="web">Nuestro sitio web</h3>
                     <ul class="list">
                         <li>Douglas Arguello</li>
                         <li>Brigner Carriel</li>
@@ -156,16 +180,16 @@
                         <li>Josué Zambrano</li>
                     </ul>
                 </div>
-                
+
                 <div class="six columns">
-                    <h3>Información:</h3>
+                    <h3 class="info">Información:</h3>
                     <ul class="list">
                         <li>UNEMI - Facultad Ciencias de la Ingeniería</li>
                         <li>Ingeniería en Software 8A1</li>
                         <li>Desarrollo Web - Proyecto DocsPine</li>
                         <li>Desarrollo fuera de producción</li>
                     </ul>
-    
+
                     <p class="copyright">Company ACDAZCorp © 2024</p>
                 </div>
             </div>
@@ -181,9 +205,11 @@
 
 
 
-    <script type="text/javascript" src="{{ url_for('static', filename='js/idioma.js') }}"></script>        
-    <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>        
-    <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>        
+    <script type="text/javascript" src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/active-button-header.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/idioma.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login-lenguaje.js') }}"></script>
 </body>
 
 </html>

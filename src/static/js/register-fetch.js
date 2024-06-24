@@ -141,6 +141,7 @@ inputs[6].addEventListener('change', e =>{
             addImage(file);
         } else {
             trashImage(file);
+            alert('La imagen no cumple los requisitos.');
         };
     } else {
         trashImage(file);
