@@ -308,7 +308,7 @@ def misProyectos(order_by='random', sessionTime=0):
     # # Proceso para definir el idioma del sistema
     idioma = getLanguajeSystem()
 
-    return render_template('proyectos/misProyectosPrueba.html',
+    return render_template('proyectos/misProyectos.html',
                         idioma=idioma,
                         proyectos=objetoProyecto,
                         # comentarios=objetoComentarios,
@@ -335,7 +335,7 @@ def allProyectos(order_by='random', sessionTime=0):
     # # Proceso para definir el idioma del sistema
     idioma = getLanguajeSystem()
     
-    return render_template('proyectos/prueba.html',
+    return render_template('proyectos/List_Proyectos.html',
                         idioma=idioma,
                         proyectos=objetoProyecto,
                     #    comentarios=objetoComentarios,

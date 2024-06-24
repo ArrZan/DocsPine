@@ -1,0 +1,315 @@
+{% extends "proyectos/base-proyecto.html" %}
+
+{% block title %}DocsPine{% endblock %}
+
+{% block customCSS2 %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/docs_style.css') }}">
+{% endblock %}
+
+{% block filters %}
+<div class="row filter">
+
+    <div class="filter-type">
+        <div class="select-cont">
+            <form method="GET" action="{{ url_for('all_Proyectos') }}">
+                <label for="order_by">{{idioma.Ordenar_por}}:</label>
+                <select name="order_by" id="order_by" onchange="this.form.submit()">
+                <!--    <option value="random" {% if request.args.get('order_by') == 'random' %}selected{% endif %}>Aleatorio</option>-->
+                    <option value="rating_desc" {% if request.args.get('order_by') == 'rating_desc' %}selected{% endif %}>{{idioma.Mejor_Calificado}}</option>
+                    <option value="rating_asc" {% if request.args.get('order_by') == 'rating_asc' %}selected{% endif %}>{{idioma.Peor_Calificado}}</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block lista %}
+{% for proyecto in proyectos %}
+    <div class="row card">
+
+        <div class="col">
+            {% set calificacion_proyecto = calificacion | selectattr("IDProyecto", "equalto", proyecto.ID) | list %}
+            {% if calificacion_proyecto %}
+            {% set promedio_calificacion = calificacion_proyecto | map(attribute='Calificacion') | sum / calificacion_proyecto|length %}
+            {% for c in calificacion_proyecto %}
+            <div class="card-point">
+                <div class="ol po-star">
+                    {% for i in range(1, 6) %}
+                    {% if i <= promedio_calificacion %}
+                        <i class='bx bxs-star'></i>
+                    {% else %}
+                        <i class='bx bx-star'></i>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="po-digit">/{{ promedio_calificacion | round(1) }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="card-point">
+                <div class="ol po-star">
+                    {% for i in range(1, 6) %}
+                        <i class='bx bx-star'></i> 
+                    {% endfor %}
+                </div>
+                <p class="po-digit">/0.0</p>
+            </div>
+            {% endif %}
+        </div>
+        <!-- ###############################################################   -->
+
+        <div class="row card-content">
+            <div class="three columns">
+                <div class="cont-img">
+                    {% if proyecto.Imagen %}
+                    <img class="modal_foto" src="data:image/jpeg;base64,{{ proyecto.Imagen }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% else %}
+                    <img style="width: 100%; height: auto;" class="modal_foto" src="{{ url_for('static', filename='images/default/nonimage.svg') }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="nine columns">
+                <div class="cont-text">
+                    <div class="cont-title">
+                        <h5> {{ proyecto.NombreProyecto}}</h5>
+                    </div>
+                    <div class="cont-desc">
+                        <p>{{ proyecto.DescripcionProyecto | truncate(300, True, '...') }}</p>
+                    </div>
+                </div>
+                <div class="cont-button">
+                    <i>
+                        <div class="perfil">
+                            <img src="{{ proyecto.Foto }} " alt="Foto perfil">
+                        </div>
+                        <strong>{{ idioma.Autor }}: </strong>
+                        {{ proyecto.NombreUsuario}}
+                    </i>
+                    
+                    
+                    <button class="cont-btn" id="abrir_modal" data-bs-toggle="modal"
+                        data-bs-target="#modal{{proyecto.ID}}">
+                        {{ idioma.Visualizar }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- modal  -->
+<section class="modal modal-custom" id="modal{{proyecto.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+    <div class="modal_container shadow-lg">
+
+
+        <!-- apartado de la infomación -->
+        <div class="modal_apartado_info"><!-- CAMBIOOOOOO-->
+            <div class="modal_content row">
+                <div class="modal_conten_foto col">
+                    {% if proyecto.Imagen %}
+                    <img class="modal_foto" src="data:image/jpeg;base64,{{ proyecto.Imagen }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% else %}
+                    <img class="modal_foto" src="{{ url_for('static', filename='images/default/nonimage.svg') }}"
+                        alt="imagen {{ proyecto.NombreProyecto }}">
+                    {% endif %}
+                </div>
+                <div class="col info_project">
+                    <!-- CAMBIOOOOOO-->
+                    <div>
+                        <h5 style="font-weight: bold;">{{ proyecto.NombreProyecto }}</h5>
+                        <h6>
+                            <b>{{ idioma.Autor }}:</b>
+                            {{ proyecto.NombreUsuario }}
+                        </h6>
+                        <h6>
+                            <b>{{ idioma.Fecha_creación }}:</b>
+                            {{ proyecto.Fecha }}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="modal_descripcion">
+                <div class="row">
+                    <div class="col">
+                        <h4>{{ idioma.Puntuación }}:</h4>
+                    </div>
+                    <div class="col">
+                        {% set calificacion_proyecto = calificacion | selectattr("IDProyecto", "equalto", proyecto.ID) |
+                        selectattr("IDUsuario", "equalto", idUsuariologin) | list %}
+                        {% if calificacion_proyecto %}
+                        {% for c in calificacion_proyecto %}
+                        <form id="calificacion{{ proyecto.ID }}" action="/re_calificar/{{ proyecto.ID }}/{{ c.ID }}"
+                            method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <p class="clasificacion">
+                                <input class="input1" id="radio1{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="5" {% if c.Calificacion==5 %} checked {%
+                                    endif %}>
+                                <label class="label1" for="radio1{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio2{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="4" {% if c.Calificacion==4 %} checked {%
+                                    endif %}>
+                                <label class="label1" for="radio2{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio3{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="3" {% if c.Calificacion==3 %} checked {%
+                                    endif %}>
+                                <label class="label1" for="radio3{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio4{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="2" {% if c.Calificacion==2 %} checked {%
+                                    endif %}>
+                                <label class="label1" for="radio4{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio5{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="1" {% if c.Calificacion==1 %} checked {%
+                                    endif %}>
+                                <label class="label1" for="radio5{{ proyecto.ID }}">★</label>
+                            </p>
+                            <input type="hidden" id="calificar_proyecto{{ proyecto.ID }}" name="calificar_proyecto">
+                        </form>
+                        {% endfor %}
+                        {% else %}
+                        <form id="calificacion{{ proyecto.ID }}" action="/calificar/{{ proyecto.ID }}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <p class="clasificacion">
+                                <input class="input1" id="radio1{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="5">
+                                <label class="label1" for="radio1{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio2{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="4">
+                                <label class="label1" for="radio2{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio3{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="3">
+                                <label class="label1" for="radio3{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio4{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="2">
+                                <label class="label1" for="radio4{{ proyecto.ID }}">★</label>
+                                <input class="input1" id="radio5{{ proyecto.ID }}" type="radio"
+                                    name="estrellas{{ proyecto.ID }}" value="1">
+                                <label class="label1" for="radio5{{ proyecto.ID }}">★</label>
+                            </p>
+                            <input class="input1" type="hidden" id="calificar_proyecto{{ proyecto.ID }}"
+                                name="calificar_proyecto">
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <b>{{ idioma.Descripción }}:</b>
+
+                <p>{{ proyecto.DescripcionProyecto }}</p>
+
+                <b style="margin-bottom: 2rem;">{{ idioma.Archivos }}</b>
+
+                <div id="cont-files">
+                    
+                    <div id="filewrapper">
+                        
+                        {% for archivo in proyecto.Archivos %}
+
+                            <a download href="{{ url_for('mostrar_archivo', nombre_usuario=proyecto.NombreUsuario, nombre_proyecto=proyecto.NombreProyecto, nombre_archivo=archivo) }}">
+                                <div class="showfilebox" data-index="0">
+                                    <div class="left">
+                                        <span class="filetype">{{ archivo.split('.')[-1] }}</span>
+                                        <h3>
+                                            {{ archivo.split('_')[-1] }}
+                                        </h3>
+                                    </div>
+
+                                    <div class="right download">
+                                        <i class='bx bxs-download'></i>
+                                    </div>            
+                                </div>
+                            </a>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- apartado de comentarios -->
+        <div class="modal_apartado_coment">
+            {% for comentario in comentarios %}
+                {% if proyecto.ID == comentario.IDProyecto %}
+                
+                    <div class="row">
+                        {% if comentario.IDUsuario == current_user.id %} <!-- Si el comentario es del usuario logeado -->
+                            
+                            <div class="modal_coment col">
+                                <div class="row">
+                                    <div class="col"><b>{{ comentario.NombreUsuario}}</b></div>
+                                    <div class="col" style="text-align: end;"><b>{{ comentario.Fecha.strftime('%Y-%m-%d') }}</b></div>
+                                </div>
+                                <p>{{ comentario.Comentario}}.</p>
+                            </div>
+
+                            <div style="margin-left: 20px;" class="col-2"><img class="foto_comentario centrar"
+                                src="{{ comentario.Foto }}" alt="{{ comentario.NombreUsuario}}">
+                        </div>
+                        
+                        {% else %}
+                            <div class="col-2"><img class="foto_comentario centrar"
+                                    src="{{ comentario.Foto }}" alt="{{ comentario.NombreUsuario}}">
+                            </div>
+                            
+                            <div class="modal_coment col">
+                                <div class="row">
+                                    <div class="col"><b>{{ comentario.NombreUsuario}}</b></div>
+                                    <div class="col" style="text-align: end;"><b>{{ comentario.Fecha.strftime('%Y-%m-%d') }}</b></div>
+                                </div>
+                                <p>{{ comentario.Comentario}}.</p>
+                            </div>
+
+                        {% endif %}
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+        <form class="agregar_comentario" action="/comentar/{{proyecto.ID}}" data-project-id="{{ proyecto.ID }}" data-user-id="{{ current_user.id }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <textarea class="redactar_comentario" name="redactar_comentario" cols="40" rows="2"
+                placeholder="{{ idioma.Escribe_comentario }}"></textarea>
+            <button type="submit" class="enviar_comentario">{{ idioma.Comentar }}</button>
+        </form>
+
+
+        <a href="#" class="modal_cerrar">{{ idioma.Cerrar }}</a>
+
+    </div>
+</section>
+{% endfor %}
+{% endblock %}
+
+
+
+
+
+{% block JS %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/coment_fetch.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    var sessionTime = "{{ sessionTime }}";
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/sesion_logout_time.js') }}"></script>
+{% endblock %}
