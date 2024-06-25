@@ -106,6 +106,9 @@
                                         <option value="3" {% if idioma.idioma_actual == 'Frances' %} selected {% endif %}>Francés</option>
                                         <option value="4" {% if idioma.idioma_actual == 'Italiano' %} selected {% endif %}>Italiano</option>
                                         <option value="5" {% if idioma.idioma_actual == 'Portugués' %} selected {% endif %}>Portugués</option>
+                                        <option value="6" {% if idioma.idioma_actual == 'Alemán' %} selected {% endif %}>Alemán</option>
+                                        <option value="7" {% if idioma.idioma_actual == 'Polaco' %} selected {% endif %}>Polaco</option>
+                                        <option value="8" {% if idioma.idioma_actual == 'Ruso' %} selected {% endif %}>Ruso</option>
                                         {% else %}
                                         <option id="id_seleccionado" disabled selected value="español">{{ idioma.Idioma_Selec }}</option>
                                         <option value="1">Español</option>
@@ -113,6 +116,9 @@
                                         <option value="3">Francés</option>
                                         <option value="4">Italiano</option>
                                         <option value="5">Portugués</option>
+                                        <option value="6">Alemán</option>
+                                        <option value="7">Polaco</option>
+                                        <option value="8">Ruso</option>
                                         {% endif %}
                                     </select>
                                 </form>
@@ -134,6 +140,9 @@
                         <option value="frances" data-fullname="Francés">FR</option>
                         <option value="italiano" data-fullname="Italiano">IT</option>
                         <option value="portugues" data-fullname="Portugués">PO</option>
+                        <option value="aleman" data-fullname="Alemán">AL</option>
+                        <option value="polaco" data-fullname="Polaco">PO</option>
+                        <option value="ruso" data-fullname="Ruso">PO</option>
                     </select>
                 </div>
             </div>

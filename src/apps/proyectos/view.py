@@ -85,6 +85,12 @@ def getLanguajeSystem():
         i=lenguajes.Italiano()
     if 5==current_user.idioma:
         i=lenguajes.Portugues()
+    if 6==current_user.idioma:
+        i=lenguajes.Alemán()
+    if 7==current_user.idioma:
+        i=lenguajes.Polaco()
+    if 8==current_user.idioma:
+        i=lenguajes.Ruso()
 
     return i
 
@@ -308,7 +314,7 @@ def misProyectos(order_by='random', sessionTime=0):
     # # Proceso para definir el idioma del sistema
     idioma = getLanguajeSystem()
 
-    return render_template('proyectos/misProyectos.html',
+    return render_template('proyectos/misProyectosPrueba.html',
                         idioma=idioma,
                         proyectos=objetoProyecto,
                         # comentarios=objetoComentarios,
@@ -335,7 +341,7 @@ def allProyectos(order_by='random', sessionTime=0):
     # # Proceso para definir el idioma del sistema
     idioma = getLanguajeSystem()
     
-    return render_template('proyectos/List_Proyectos.html',
+    return render_template('proyectos/prueba.html',
                         idioma=idioma,
                         proyectos=objetoProyecto,
                     #    comentarios=objetoComentarios,

@@ -20,6 +20,7 @@ const reg1El = document.querySelector('.reg1');
 const message1 = document.getElementById('message1');
 const message2 = document.getElementById('message2');
 const message3 = document.getElementById('message3');
+const message4 = document.getElementById('message4');
 
 if (select) {
 
@@ -51,6 +52,7 @@ if (select) {
         message1.textContent = data[language].messages[0];
         message2.textContent = data[language].messages[1];
         message3.textContent = data[language].messages[2];
+        message4.textContent = data[language].messages[3];
     
     }
     
@@ -72,6 +74,7 @@ if (select) {
             "reg1":"Registrate",
             "messages": [
                 "Dato no obligatorio.",
+                "message3.textContent = data[language].messages[2];",
                 "Tamaño máximo de 2MB.",
                 "Tipo de imagen permitido JPEG, JPG, PNG."
             ],
@@ -93,6 +96,7 @@ if (select) {
             "reg1":"Register",
             "messages": [
                 "Not a required field.",
+                "We recommend the photo to be square (e.g., 256x256px).",
                 "Maximum size of 2MB.",
                 "Allowed image types JPEG, JPG, PNG."
             ],
@@ -114,6 +118,7 @@ if (select) {
             "reg1": "Inscrivez-vous",
             "messages": [
                 "Donnée non obligatoire.",
+                "Nous recommandons que la photo soit carrée (ex: 256x256px).",
                 "Taille maximale de 2MB.",
                 "Type d'image autorisé JPEG, JPG, PNG."
             ]
@@ -135,6 +140,7 @@ if (select) {
             "reg1": "Registrati",
             "messages": [
                 "Dato non obbligatorio.",
+                "Raccomandiamo che la foto sia quadrata (es: 256x256px).",
                 "Dimensione massima di 2MB.",
                 "Tipo di immagine consentito JPEG, JPG, PNG."
             ]
@@ -156,10 +162,81 @@ if (select) {
             "reg1": "Cadastre-se",
             "messages": [
                 "Dado não obrigatório.",
+                "Recomendamos que a foto seja quadrada (ex: 256x256px).",
                 "Tamanho máximo de 2MB.",
                 "Tipo de imagem permitido JPEG, JPG, PNG."
             ]
-        }
+        },
+        "aleman": {
+            "web": "Unsere Website",
+            "info": "Information",
+            "login": "Anmelden",
+            "register": "Registrieren",
+            "log1": "Melden Sie sich jetzt an!",
+            "log2": "Einloggen",
+            "username": "Benutzername",
+            "password": "Passwort",
+            "reg0": "Jetzt registrieren!",
+            "username1": "Vor- und Nachname",
+            "emailInput": "E-Mail-Adresse",
+            "passwordc": "Passwort bestätigen",
+            "imgs": "Wählen Sie ein Bild aus",
+            "reg1": "Registrieren",
+            "messages": [
+                "Daten sind optional.",
+                "Wir empfehlen, dass das Foto quadratisch ist (z.B. 256x256px).",
+                "Maximale Dateigröße 2MB.",
+                "Erlaubtes Bildformat: JPEG, JPG, PNG."
+            ]
+        },
+        "polaco": {
+        "web": "Nasza strona internetowa",
+        "info": "Informacje",
+        "login": "Zaloguj się",
+        "register": "Zarejestruj się",
+        "log1": "Zaloguj się teraz!",
+        "log2": "Zaloguj",
+        "username": "Nazwa użytkownika",
+        "password": "Hasło",
+        "reg0": "Zarejestruj się teraz!",
+        "username1": "Imię i nazwisko",
+        "emailInput": "Adres e-mail",
+        "passwordc": "Potwierdź hasło",
+        "imgs": "Wybierz obraz",
+        "reg1": "Zarejestruj się",
+        "messages": [
+            "Dane nie są wymagane.",
+            "Zalecamy, aby zdjęcie było kwadratowe (np. 256x256px).",
+            "Maksymalny rozmiar pliku 2MB.",
+            "Dozwolony format obrazu: JPEG, JPG, PNG."
+        ]
+        },
+        "ruso": {
+        "web": "Наш веб-сайт",
+        "info": "Информация",
+        "login": "Войти",
+        "register": "Зарегистрироваться",
+        "log1": "Войдите сейчас!",
+        "log2": "Войти",
+        "username": "Имя пользователя",
+        "password": "Пароль",
+        "reg0": "Зарегистрируйтесь сейчас!",
+        "username1": "Имя и фамилия",
+        "emailInput": "Электронная почта",
+        "passwordc": "Подтвердите пароль",
+        "imgs": "Выберите изображение",
+        "reg1": "Зарегистрироваться",
+        "messages": [
+            "Данные не обязательны.",
+            "Рекомендуем, чтобы фотография была квадратной (например, 256x256px).",
+            "Максимальный размер файла 2MB.",
+            "Разрешённые форматы изображений: JPEG, JPG, PNG."
+        ]
+    }
+    }
+
+    
+        
     }
     document.addEventListener('DOMContentLoaded', () => {
         updateSelectedLanguage(); // Initial update in case there's a default selected option
@@ -170,7 +247,7 @@ if (select) {
         const selectedOption = selectElement.options[selectElement.selectedIndex];
     
         // Display only the initials for the selected option
-        const initials = selectedOption.value.toUpperCase().substring(0, 2);
+        const initials = selectedOption.value.toUpperCase().substring(0, 3);
         selectedOption.textContent = initials;
     }
     
@@ -181,7 +258,7 @@ if (select) {
             option.textContent = option.getAttribute('data-fullname');
         }
     }
-}
+
 
 
 

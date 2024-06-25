@@ -45,7 +45,7 @@ body {
 #langselect {
     background-color: var(--cl-primary-dark);
     color: #fff ;
-    width: 70px; /* Ajusta el ancho según sea necesario para las iniciales */
+    width: 75px; /* Ajusta el ancho según sea necesario para las iniciales */
     text-align: center;
 }
 
