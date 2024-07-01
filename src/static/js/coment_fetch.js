@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         comentarioForm.addEventListener('submit', function(event) {
             event.preventDefault();
-    
+
             const formData = new FormData(comentarioForm);
-    
+
             if (formData.get('redactar_comentario')) {
                 const url = comentarioForm.action;
-    
+
                 formData.get('csrf_token');
-    
+
                 fetch(url, {
                     method: 'POST',
                     body: formData,
@@ -37,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data.error) {
                         alert(data.error);
                     } else {
-    
+
                         socket.emit('new_comment', data);
+                        generateComment(data);
                     }
                 })
                 .catch(error => {
@@ -49,24 +50,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Ingrese un comentario!')
             }
         });
-    
-    
+
+
         // -------------------------------------------------------Función para comunicación bidirecciona
         // Escuchar el evento 'nuevo_comentario' del handle del servidor
         socket.on('new_comment', function(data) {
-            generateComment(data);
+           generateComment(data);
         });
-    
-    
+
+
         function generateComment(data) {
             const comentarioForm = document.querySelector('.agregar_comentario');
             const idUser = comentarioForm.dataset.userId;
-            
-            
+
+
             const comentario = data.new_comment;
-            
+
             let newComment = ''
-    
+
             if (idUser == data.id_issuer) {
                 newComment = `
                     <div class="row">
@@ -93,35 +94,35 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 `;
-    
+
             }
-    
+
             const comentariosDiv = document.querySelector('.modal_apartado_coment');
             // Insertamos arriba de todos los comentarios
             comentariosDiv.insertAdjacentHTML('afterbegin', newComment);
-    
+
             // Limpiar el campo de redactar comentario
             document.querySelector('.redactar_comentario').value = '';
-    
+
             // Hacer scroll hacia arriba para mostrar el nuevo comentario
             scrollToTop(comentariosDiv);
         }
-    
-    
+
+
         function scrollToTop(element) {
             const startingY = element.scrollTop;
             const targetY = 0;
             const distance = targetY - startingY;
             const duration = 500; // Duración de la animación en milisegundos
             const startTime = performance.now();
-    
+
             function easeInOutQuad(t, b, c, d) {
                 t /= d / 2;
                 if (t < 1) return c / 2 * t * t + b;
                 t--;
                 return -c / 2 * (t * (t - 2) - 1) + b;
             }
-    
+
             function animateScroll(timestamp) {
                 const currentTime = timestamp - startTime;
                 element.scrollTop = easeInOutQuad(currentTime, startingY, distance, duration);
@@ -131,10 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     element.scrollTop = targetY;
                 }
             }
-    
+
             requestAnimationFrame(animateScroll);
         }
-        
+
     }
 
 });

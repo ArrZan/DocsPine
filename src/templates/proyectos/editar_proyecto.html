@@ -2,18 +2,20 @@
 
 {% block title %} {{ idioma.Editar_Proyecto }} {% endblock %}
 
-{% block customCSS %}   
+{% block customCSS %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/docs_style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
 {% endblock %}
 
 {% block editProyecto %}
-    
+
     <!-- contenido de la pagina FORMULARIO-->
     <div id="form-project" class="container">
         <h1>{{ idioma.Editar_Proyecto }}</h1>
         <hr>
-        <form action="/actualizar_proyecto" method="POST" enctype="multipart/form-data">
+        <form id="create-project" action="/actualizar_proyecto" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
             <div class="formulario">
                 <div class="form-column-1">
                     <input type="file" name="Imagen" id="Imagen" hidden accept="image/*" onchange="return validarExtImagen(this)">
@@ -47,7 +49,7 @@
             <!-- En el template editar_proyecto.html -->
             <h5>{{ idioma.Archivos }}</h5>
             <div class="container-upload">
-                <input type="file" class="" id="file" hidden name="Archivo" onchange="return validarExt()" multiple>
+                <input type="file" class="" id="file" hidden name="Archivo" multiple>
                 <label for="file" class="uploadlabel">
                     <span>
                         <img src="{{ url_for('static', filename='images/default/addthis_3.png') }}" alt="">
@@ -56,7 +58,6 @@
                 </label>
                 <br>
                 <div id="filewrapper">
-                    <h5 class="uploaded">{{ idioma.Documentos_Cargados }}</h5>
                     {% for archivo in proyecto.Archivos %}
                         <div class="showfilebox archivo-item">
                             <div class="left">
@@ -74,7 +75,7 @@
             <hr>
             <div class="btn-container">
                 <button type="submit" class="cont-btn">{{ idioma.Aceptar }}</button>
-                <a href="{{ url_for('mis_Proyectos') }}" class="cont-btn" onclick="return confirm('¿Estás seguro de cancelar?')">{{ idioma.Cancelar }}</a>
+                <a href="{{ url_for('mis_Proyectos') }}" class="cont-btn" onclick="cancelSave(event)">{{ idioma.Cancelar }}</a>
             </div>
         </form>
     </div>

@@ -279,19 +279,6 @@ form {
     transform: scale(1);
 }
 
-.cont-a {
-    padding: 3px 30px;
-    border-radius: 4px;
-    color: var(--cl-error-dark);
-    background: var(--cl-form);
-    border: 1px solid var(--cl-error-dark);
-    text-decoration: none;
-}
-
-.cont-a:hover {
-    color: var(--cl-form);
-    background: var(--cl-error-dark);
-}
 
 .cont-btn {
     margin-bottom: 0;
@@ -333,7 +320,7 @@ form {
     .card-content > .three.columns {
         width: 100%;
     }
-    
+
     .card-content > .nine.columns {
         width: 100%;
     }
@@ -353,28 +340,28 @@ form {
 
 /* Larger than phablet */
 @media screen and (min-width: 550px) and (max-width:749px) {
-    
+
     .card-content > .three.columns {
         width: 38%;
     }
-    
+
     .card-content > .nine.columns {
         width: 58%;
         overflow-y: scroll;
     }
 
 
-    
+
 }
 
 /* Larger than tablet */
 @media screen and (min-width: 750px) and (max-width:999px) {
-    
+
 }
 
 /* Larger than desktop */
 @media screen and (min-width: 1000px) and (max-width:1199px) {
-    
+
     .card-content > .three.columns {
         width: 22%;
     }

@@ -14,13 +14,13 @@ from apps.login.views import LoginView, RegisterView
 
 # Importaciones propias
 from apps.user.Models import ModelUser
-from apps.user.entities.User import User
-from config import config
 from apps.proyectos.view import misProyectos, allProyectos, consultProject
 from apps.proyectos.view import comentar as proyectos_comentar
 from apps.proyectos.view import calificar as proyectos_calificar
 from apps.proyectos.view import re_calificar as proyectos_recalificar
 from apps.proyectos.view import idioma as select_idioma
+from config import config
+
 
 # Importaciones para la CRUD de los proyectos/trabajos
 from apps.proyectos.view import crear_proyecto as CrearProyect
@@ -36,9 +36,11 @@ csrf = CSRFProtect() # Protección de csrf pa los form's
 
 socketio = SocketIO(app) # Envío en tiempo real para comentarios
 
+from datetime import timedelta
+
 
 db = MySQL(app) # Instancia de mi bd
-login_manager_app = LoginManager(app) 
+login_manager_app = LoginManager(app)
 
 STATIC_DIR = os.path.join(app.root_path, 'static') # Dirección de mi static
 
@@ -105,8 +107,8 @@ def comentar(id):
 
 @socketio.on('new_comment')
 def handle_new_comment(comment):
-    # Se difunde el comentario a todos los clientes
-    emit('new_comment', comment, broadcast=True)
+   # Se difunde el comentario a todos los clientes
+   emit('new_comment', comment, broadcast=True)
 
 
 
@@ -152,21 +154,24 @@ def delete(ID):
 @app.route('/editar_proyecto/<string:ID>')
 def editar_proyecto(ID):
     return EditarP(ID)
-    
+
 # Ruta para actualizar un proyecto después de la edición
 @app.route('/actualizar_proyecto', methods=['POST'])
 @csrf.exempt
 def actualizar_proyecto():
     return ActualizarP()
-    
+
 
 # Errores de respuesta HTTP
 #------------------------------------------------------------
+@app.errorhandler(401)
 def status_401(error):
     return redirect(url_for('login'))
 
+@app.errorhandler(404)
 def status_404(error):
     return render_template('errors/error_404.html'), 404
+
 
 
 if __name__=='__main__':

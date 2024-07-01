@@ -2,6 +2,10 @@ const file = document.getElementById('Imagen');
 const img = document.getElementById('img');
 const text_img = document.querySelector('.cont-opt');
 
+let archivosSeleccionados = []; // Lista de archivos seleccionados
+let removedFiles = []; // Lista de archivos eliminados
+
+
 // Función para validar la extensión de un archivo de imagen
 const validarExtImagen = (input) => {
     const archivoRuta = input.value;
@@ -23,7 +27,63 @@ function trashImage() {
     document.querySelector('.btn-trash').classList.remove('active');
     img.src = '/static/images/default/upload_img1.png';
     img.style.width = '60%';
+    file.value = "";
 }
+
+
+const modal = document.querySelector('.modal-back');
+const modalFooter = modal.querySelector('.modal-footer');
+const modalResponse = modal.querySelector('.modal-response');
+
+
+document.addEventListener('click', function(event) {
+    if (event.target.tagName == 'A') {
+        event.preventDefault();
+        if (event.target.className != 'cont-a') {
+            verificate_Form(event);
+        } else {
+            window.location.href = event.target.href;
+        };
+    }
+});
+
+
+function cancelSave(event) {
+    event.preventDefault();
+    verificate_Form(event);
+}
+
+
+function verificate_Form(event) {
+    const form = document.querySelector('form#create-project');
+    const inputs = form.querySelectorAll('input');
+    const inputTitle = inputs[2].value;
+    const inputDesc = form.querySelectorAll('textarea')[0].value;
+    const files = inputs[5];
+
+    // Si existe alguna alteración en el form lanza una alerta
+    if (inputTitle || inputDesc || file.files.length > 0 || archivosSeleccionados.length > 0) {
+        modalResponse.classList.add('error');
+        modalResponse.querySelector('.modal-header p').textContent = 'Advertencia';
+
+        modalResponse.querySelector('.modal-body .icon i').classList.add('bx', 'bxs-error');
+        modalResponse.querySelector('.modal-body .text').innerHTML = `¿Estás seguro que no quieres guardar? <strong>Se perderán todos tus cambios!</strong>`;
+
+        modal.classList.add('active');
+
+        modalFooter.innerHTML = '';
+
+        modalFooter.innerHTML = `
+            <a class="cont-a" href="${event.target.href}">
+                Cancelar cambios
+            </a>
+        `
+
+    } else {
+        window.location.href = event.target.href;
+    }
+}
+
 
 // Código para mostrar una imagen seleccionada en un elemento <img>
 file.addEventListener('change', e => {
@@ -48,8 +108,7 @@ window.addEventListener("load", () => {
     const input = document.getElementById("file");
     // Obtener el contenedor de archivos
     const filewrapper = document.getElementById("filewrapper");
-    let archivosSeleccionados = []; // Lista de archivos seleccionados
-    let removedFiles = []; // Lista de archivos eliminados
+
     // Obtener archivos existentes en el contenedor
     const existingFiles = Array.from(document.querySelectorAll('.archivo-item'));
 
@@ -123,8 +182,30 @@ window.addEventListener("load", () => {
     };
 
     // Filtrar archivos eliminados antes de enviar el formulario
-    const form = document.querySelector("form");
+    const form = document.querySelector("form#create-project");
+    const inputFile = document.getElementById("file");
     form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        console.log('inputFile.files.length');
+        // Verificamos si hay archivos seleccionados
+        if (inputFile.files.length == 0) {
+            if (filewrapper.children.length == 0) {
+                modalResponse.classList.add('error');
+                modalResponse.querySelector('.modal-header p').textContent = 'Advertencia';
+
+                modalResponse.querySelector('.modal-body .icon i').classList.add('bx', 'bxs-error');
+                modalResponse.querySelector('.modal-body .text').innerHTML = `Por favor, agregue al menos un archivo.`;
+
+                modal.classList.add('active');
+
+                modalFooter.innerHTML = '';
+                return; // Evitanos que el formulario se envíe
+            }
+        }
+
+
+
         // Crear un objeto DataTransfer para manejar los archivos
         const dataTransfer = new DataTransfer();
         console.log(archivosSeleccionados)
@@ -140,6 +221,8 @@ window.addEventListener("load", () => {
         removedInput.value = JSON.stringify(removedFiles);
         // Agregar el campo oculto al formulario antes de enviarlo
         form.appendChild(removedInput);
+
+        form.submit();
     });
 
     // Manejar la eliminación de archivos existentes

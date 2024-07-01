@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 from flask_login import login_user, current_user
 
-# 
+#
 # ------------------------------------------------------------------------------------------------------------- Modelos
 from apps.user.Models import ModelUser
 from apps.user.entities.User import User
@@ -20,7 +20,7 @@ lenguajes=Lenguajes()
 class LoginView(MethodView):
     def __init__(self, db):
         self.db = db
-    
+
     def get(self):
         if current_user.is_authenticated:
             return redirect(url_for('all_Proyectos'))
@@ -37,11 +37,11 @@ class LoginView(MethodView):
             elif current_user.idioma == 5:
                 idioma = lenguajes.Portugues()
         else:
-    
+
             idioma = lenguajes.Español()  # idioma por defecto para usuarios no autenticados
 
         return render_template('auth/login.html', idioma=idioma)
-    
+
     def post(self):
         #Primero preguntamos si el usuario ya se ha autenticado
         if current_user.is_authenticated:
@@ -66,7 +66,7 @@ class LoginView(MethodView):
         else:
             flash('Usuario no encontrado.')
             return render_template('auth/login.html')
-        
+
 
 
 # ------------------------------------------------------------------------------------------------------- Ruta Register
@@ -74,12 +74,12 @@ class RegisterView(MethodView):
     def __init__(self, db, static):
         self.db = db
         self.static = static
-    
+
     def get(self):
         if current_user.is_authenticated:
             return redirect(url_for('all_Proyectos'))
         return render_template('auth/login.html')
-    
+
     def post(self):
         # Creamos el objeto usuario con los datos enviados del POST
         try:
@@ -100,9 +100,9 @@ class RegisterView(MethodView):
                         # Generamos un nombre más seguro
                         filename = secure_filename(randomName)
 
-                        image_dir = os.path.join(self.static, 'images', 'perfil')
+                        image_dir = os.path.join(self.static, 'img', 'perfil')
 
-                        # Guardamos la imagen en la dirección 'static/images/perfil' con el nombre seguro
+                        # Guardamos la imagen en la dirección 'static/img/perfil' con el nombre seguro
                         image.save(os.path.join(image_dir, filename))
             else:
                 filename = ''
@@ -118,12 +118,12 @@ class RegisterView(MethodView):
                 login_user(user=logged_user, force=True)
                 data = {'message': '¡Te haz registrado exitosamente!\nTe redirigiremos a la página principal!',
                         'redirectUrl': 'List_Proyectos'}
-                
+
                 # Lo redireccionamos a home ya que se ha registrado y lo queremos logear directamente
                 return jsonify(data)
-            
+
         except Exception as e:
             raise Exception(e)
 
-        
+
         return jsonify(logged_user)

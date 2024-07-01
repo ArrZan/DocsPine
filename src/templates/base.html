@@ -22,13 +22,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 
-    <!-- CSS Icons 
+    <!-- CSS Icons
     -------------------------------------------------- -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Icono de la pagina
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='svg/logo pagina/logo.svg')}}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/svg/logo.svg')}}">
 
     <!-- CSS propio y personalizado
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="five columns">
                 <div class="logo" id="logoNav">
-                    <img src="{{ url_for('static', filename='svg/logo pagina/logo.svg')}}" alt="Logo de Empresa">
+                    <img src="{{ url_for('static', filename='img/svg/logo.svg')}}" alt="Logo de Empresa">
                     <p>DOCSPINE</p>
                 </div>
             </div>
@@ -134,7 +134,7 @@
             {% else %}
             <div class="containerl">
                 <div class="lenguajeS">
-                    <select id="langselect" onchange=updateSelectedLanguage() onfocus=showFullNames()> 
+                    <select id="langselect" onchange=updateSelectedLanguage() onfocus=showFullNames()>
                         <option value="español" data-fullname="Español">ES</option>
                         <option value="english" data-fullname="English">EN</option>
                         <option value="frances" data-fullname="Francés">FR</option>
@@ -146,7 +146,7 @@
                     </select>
                 </div>
             </div>
-            {% endif %} 
+            {% endif %}
         </div>
     </header>
 
@@ -176,37 +176,71 @@
     </div>
 
     {% block footer %}
-    <footer>
+    {% if current_user.is_authenticated %}
+        <footer>
 
-        <div class="container-footer">
-            <div class="row u-full-width">
-                <div class="six columns">
-                    <h3 class="web">Nuestro sitio web</h3>
-                    <ul class="list">
-                        <li>Douglas Arguello</li>
-                        <li>Brigner Carriel</li>
-                        <li>Santillán Daniel</li>
-                        <li>Josué Zambrano</li>
-                    </ul>
+            <div class="container-footer">
+                <div class="row u-full-width">
+                    <div class="six columns">
+                        <h3 class="web">{{idioma.Nuestro_sitio_web}}</h3>
+                        <ul class="list">
+                            <li>Douglas Arguello</li>
+                            <li>Brigner Carriel</li>
+                            <li>Santillán Daniel</li>
+                            <li>Josué Zambrano</li>
+                        </ul>
+                    </div>
+
+                    <div class="six columns">
+                        <h3 class="info">{{idioma.Información}}</h3>
+                        <ul class="list">
+                            <li>UNEMI - Facultad Ciencias de la Ingeniería</li>
+                            <li>Ingeniería en Software 8A1</li>
+                            <li>Desarrollo Web - Proyecto DocsPine</li>
+                            <li>Desarrollo fuera de producción</li>
+                        </ul>
+
+                        <p class="copyright">Company ACDAZCorp © 2024</p>
+                    </div>
                 </div>
 
-                <div class="six columns">
-                    <h3 class="info">Información:</h3>
-                    <ul class="list">
-                        <li>UNEMI - Facultad Ciencias de la Ingeniería</li>
-                        <li>Ingeniería en Software 8A1</li>
-                        <li>Desarrollo Web - Proyecto DocsPine</li>
-                        <li>Desarrollo fuera de producción</li>
-                    </ul>
-
-                    <p class="copyright">Company ACDAZCorp © 2024</p>
-                </div>
             </div>
 
-        </div>
+        </footer>
 
-    </footer>
+    {% else %}
+        <footer>
 
+            <div class="container-footer">
+                <div class="row u-full-width">
+                    <div class="six columns">
+                        <h3 class="web">Nuestro sitio web</h3>
+                        <ul class="list">
+                            <li>Douglas Arguello</li>
+                            <li>Brigner Carriel</li>
+                            <li>Santillán Daniel</li>
+                            <li>Josué Zambrano</li>
+                        </ul>
+                    </div>
+
+                    <div class="six columns">
+                        <h3 class="info">Información</h3>
+                        <ul class="list">
+                            <li>UNEMI - Facultad Ciencias de la Ingeniería</li>
+                            <li>Ingeniería en Software 8A1</li>
+                            <li>Desarrollo Web - Proyecto DocsPine</li>
+                            <li>Desarrollo fuera de producción</li>
+                        </ul>
+
+                        <p class="copyright">Company ACDAZCorp © 2024</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </footer>
+
+    {% endif %}
     {% endblock %}
 
     {% block JS %}

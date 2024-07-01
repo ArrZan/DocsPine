@@ -28,8 +28,8 @@ if (select) {
         const selectedLanguage = select.value;
         changeLanguage(selectedLanguage);
     });
-    
-    
+
+
     function changeLanguage(language) {
         titleEl.textContent = data[language].title;
         descrEl.textContent = data[language].description;
@@ -53,9 +53,9 @@ if (select) {
         message2.textContent = data[language].messages[1];
         message3.textContent = data[language].messages[2];
         message4.textContent = data[language].messages[3];
-    
+
     }
-    
+
     var data = {
         "español": {
             "web": "Nuestro sitio web",
@@ -235,22 +235,24 @@ if (select) {
     }
     }
 
-    
-        
+
+
     }
     document.addEventListener('DOMContentLoaded', () => {
         updateSelectedLanguage(); // Initial update in case there's a default selected option
     });
-    
+
     function updateSelectedLanguage() {
-        const selectElement = document.getElementById('langselect');
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-    
-        // Display only the initials for the selected option
-        const initials = selectedOption.value.toUpperCase().substring(0, 3);
-        selectedOption.textContent = initials;
+        if (document.getElementById('langselect')) {
+            const selectElement = document.getElementById('langselect');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            // Display only the initials for the selected option
+            const initials = selectedOption.value.toUpperCase().substring(0, 3);
+            selectedOption.textContent = initials;
+        }
     }
-    
+
     function showFullNames() {
         const selectElement = document.getElementById('langselect');
         for (let i = 0; i < selectElement.options.length; i++) {

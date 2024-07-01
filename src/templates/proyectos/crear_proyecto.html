@@ -2,7 +2,7 @@
 
 {% block title %}{{ idioma.Crear_Proyecto }}{% endblock %}
 
-{% block customCSS %}   
+{% block customCSS %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/docs_style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form-project.css') }}">
 {% endblock %}
@@ -11,7 +11,7 @@
     <div id="form-project" class="container">
         <h1>{{ idioma.Creacion_Proyecto }}</h1>
         <hr>
-        <form action="/registrar" method="POST" enctype="multipart/form-data">
+        <form id="create-project" action="/registrar" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="formulario">
                 <div class="form-column-1">
@@ -35,7 +35,7 @@
                         <label for="DescripcionProyecto">{{ idioma.Descripción }}</label>
                         <textarea class="box" name="DescripcionProyecto" id="DescripcionProyecto" cols="30" rows="2" required placeholder="Contenido de la publicación"></textarea>
                     </div>
-                    
+
                     <input hidden class="box" value="{{ fecha_actual }}" type="date" name="Fecha" autocomplete="off" readonly>
                     <input hidden class="box" type="text" name="NombreUsuario" value="{{ usuario_actual }}" readonly>
 
@@ -43,7 +43,7 @@
             </div>
             <h5>{{ idioma.Archivos }}</h5>
             <div class="container-upload">
-                <input type="file" class="" id="file" hidden name="Archivo" onchange="return validarExt()" required multiple>
+                <input type="file" class="" id="file" hidden name="Archivo" multiple>
                 <label for="file" class="uploadlabel">
                     <span>
                         <img src="{{ url_for('static', filename='images/default/addthis_3.png') }}" alt="">
@@ -58,7 +58,7 @@
             <hr>
             <div class="btn-container">
                 <button type="submit" class="cont-btn">{{ idioma.Aceptar }}</button>
-                <a href="{{ url_for('mis_Proyectos') }}" class="cont-btn" onclick="return confirm('¿Estás seguro de cancelar?')">{{ idioma.Cancelar }}</a>
+                <a href="{{ url_for('mis_Proyectos') }}" class="cont-btn" onclick="cancelSave(event)">{{ idioma.Cancelar }}</a>
             </div>
         </form>
     </div>

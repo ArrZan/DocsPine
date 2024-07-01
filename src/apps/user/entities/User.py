@@ -15,12 +15,12 @@ class User(UserMixin):
 
     def check_password(self, hashed_password, password):
         return check_password_hash(hashed_password, password)
-    
+
     def generate_password(self, password):
         return generate_password_hash(password)
 
     def get_image(self):
         if self.image:
-            return f'images/perfil/{self.image}'
+            return f'img/perfil/{self.image}'
         else:
-            return f'images/perfil/default.jpg'
+            return f'img/perfil/default.jpg'

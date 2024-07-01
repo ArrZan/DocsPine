@@ -128,6 +128,20 @@
     padding-bottom: 20px;
 }
 
+.cont-a {
+    padding: 3px 30px;
+    border-radius: 4px;
+    color: var(--cl-error-dark);
+    background: var(--cl-form);
+    border: 1px solid var(--cl-error-dark);
+    text-decoration: none;
+}
+
+.cont-a:hover {
+    color: var(--cl-form);
+    background: var(--cl-error-dark);
+}
+
 
 /* ---------------- Clases de error y éxito ---------------- */
 
